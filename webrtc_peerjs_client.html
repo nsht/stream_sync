@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+  </head>
+  <body>
+    <div id="status" class="status"></div>
+    <br />
+    <input
+      type="text"
+      id="sendMessageBox"
+      placeholder="Enter a message..."
+      autofocus="true"
+    />
+    <button type="button" id="sendButton">Send</button>
+    <hr />
+    <div class="message" id="message"></div>
+    <script>
+      var status = document.getElementById("status");
+      var connection_status = false;
+      var sendMessageBox = document.getElementById("sendMessageBox");
+      var sendButton = document.getElementById("sendButton");
+      var message = document.getElementById("message");
+
+      var peer = new Peer();
+      var conn = peer.connect("b7wbi7v5ip000000");
+
+      conn.on("open", function() {
+        connection_status = true;
+        console.log("Connected to: " + conn.peer);
+        conn.send("Hello");
+      });
+      conn.on("data", function(data) {
+        addMessage(data);
+        console.log(data);
+      });
+
+      sendButton.onclick = function() {
+        if (connection_status) {
+          var msg = sendMessageBox.value;
+          sendMessageBox.value = "";
+          conn.send(msg);
+          console.log("Sent: " + msg);
+          addMessage('<span class="selfMsg">Self: </span>' + msg);
+        } else {
+          console.log("Connection is closed");
+        }
+      };
+
+      function addMessage(msg) {
+        var now = new Date();
+        var h = now.getHours();
+        var m = addZero(now.getMinutes());
+        var s = addZero(now.getSeconds());
+
+        if (h > 12) h -= 12;
+        else if (h === 0) h = 12;
+
+        function addZero(t) {
+          if (t < 10) t = "0" + t;
+          return t;
+        }
+
+        message.innerHTML =
+          '<br><span class="msg-time">' +
+          h +
+          ":" +
+          m +
+          ":" +
+          s +
+          "</span>  -  " +
+          msg +
+          message.innerHTML;
+      }
+    </script>
+  </body>
+</html>
