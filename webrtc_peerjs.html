@@ -83,9 +83,10 @@
           status.innerHTML = "Connection reset<br>Awaiting connection...";
           conn = null;
           connection_status = false;
-          start(true); //?
+          start(true); //ゴゴゴゴ?
         });
         connections.push(conn);
+        broadcast_new_connection(conn.peer);
       }
 
       sendButton.onclick = function() {
@@ -126,6 +127,15 @@
           "</span>  -  " +
           msg +
           message.innerHTML;
+      }
+      function broadcast_new_connection(peer_id) {
+        msg = { type: "new_connection", peer_id: peer_id };
+        for (var i = 0; i < connections.length; i++) {
+          if (connections[i].peer == peer_id) {
+            continue;
+          }
+          connections[i].send(msg);
+        }
       }
     </script>
   </body>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- https://stackoverflow.com/questions/30738079/webrtc-peerjs-text-chat-connect-to-multiple-peerid-at-the-same-time -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -20,6 +21,8 @@
     <hr />
     <div class="message" id="message"></div>
     <script>
+      var peer_ids = [];
+      var connections = [];
       var status = document.getElementById("status");
       var connection_status = false;
       var sendMessageBox = document.getElementById("sendMessageBox");
@@ -27,23 +30,19 @@
       var message = document.getElementById("message");
 
       var peer = new Peer();
-      var conn = peer.connect("b7wbi7v5ip000000");
+      connect_to_peer("m6iils1zj7000000");
 
-      conn.on("open", function() {
-        connection_status = true;
-        console.log("Connected to: " + conn.peer);
-        conn.send("Hello");
-      });
-      conn.on("data", function(data) {
-        addMessage(data);
-        console.log(data);
+      peer.on("connection", function(conn) {
+        handle_connection(conn);
       });
 
       sendButton.onclick = function() {
         if (connection_status) {
           var msg = sendMessageBox.value;
           sendMessageBox.value = "";
-          conn.send(msg);
+          for (var i = 0; i < connections.length; i++) {
+            connections[i].send(msg);
+          }
           console.log("Sent: " + msg);
           addMessage('<span class="selfMsg">Self: </span>' + msg);
         } else {
@@ -75,6 +74,35 @@
           "</span>  -  " +
           msg +
           message.innerHTML;
+      }
+
+      function connect_to_peer(peer_id) {
+        var conn = peer.connect(peer_id);
+        handle_connection(conn);
+      }
+
+      function handle_connection(conn) {
+        console.log("Handle connection called");
+        peer_ids.push(conn.peer);
+        connection_status = true;
+        conn.on("data", function(data) {
+          addMessage(data);
+          if (typeof data === "object" && data !== null) {
+            if (data.type == "new_connection") {
+              connect_to_peer(data.peer_id);
+            }
+          }
+          console.log("Data Received");
+          console.log(data);
+        });
+
+        conn.on("close", function() {
+          // TODO remove peer id from list
+          status.innerHTML = "Connection reset<br>Awaiting connection...";
+          conn = null;
+          connection_status = false;
+        });
+        connections.push(conn);
       }
     </script>
   </body>
