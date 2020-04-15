@@ -1,16 +1,16 @@
 import React from "react";
 import "../css/App.css";
-
+import Navbar from "./Navbar";
 function App() {
   return (
     <>
-      <hr className="header"></hr>
+    <Navbar></Navbar>
 
       <div className="row">
-        <a className="column host" href="/host">
+        <a className="select_column host" href="/host">
           Host
         </a>
-        <a className="column join" href="/join">
+        <a className="select_column join" href="/join">
           Join
         </a>
       </div>
