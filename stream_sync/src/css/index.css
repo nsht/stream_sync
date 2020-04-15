@@ -18,7 +18,7 @@ code {
 
 .header {
   margin-top: 40px;
-  border: 0; 
+  border: 0;
 }
 
 #root {
@@ -33,28 +33,28 @@ code {
   justify-content: center;
 }
 
-.column {
+.select_column {
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 3em;
-  transition: width .5s;
+  transition: width 0.5s;
 }
-.column:hover{
+.select_column:hover {
   width: 100%;
 }
 
-.column:link {
+.select_column:link {
   color: black;
 }
 
-.column:visited {
+.select_column:visited {
   color: black;
 }
 
-.column:link {
+.select_column:link {
   text-decoration: none;
 }
 
