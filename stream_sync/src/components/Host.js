@@ -3,21 +3,26 @@ import "../css/App.css";
 import Navbar from "./Navbar";
 
 class Host extends React.Component {
+  state = {
+    host_name: "",
+    room_name: "",
+    youtube_video_id: ""
+  };
   handleSubmit = e => {
     e.preventDefault();
     var video_id = this.parseIdFromURL(e.target.youtubeLink.value);
-    console.log(video_id);
-    // if (this.youtubeLinkRef.current.value === "") {
-    //   return;
-    // }
-    // console.log(this.youtubeLinkRef.current.value);
+    this.setState({
+      host_name: e.target.userName.value,
+      room_name: e.target.roomName.value,
+      youtube_video_id: video_id
+    });
   };
   parseIdFromURL = url => {
     console.log(url);
     var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     var match = url.match(regExp);
     console.log(match);
-    if (match && match[2].length == 11) {
+    if (match && match[2].length === 11) {
       return match[2];
     } else {
       return false;
@@ -44,6 +49,7 @@ class Host extends React.Component {
                             placeholder="Type the name of your room"
                             type="text"
                             name="roomName"
+                            required
                           ></input>
                         </div>
                       </div>
@@ -57,6 +63,7 @@ class Host extends React.Component {
                             placeholder="Please enter your username"
                             type="text"
                             name="userName"
+                            required
                           ></input>
                         </div>
                       </div>
@@ -70,6 +77,7 @@ class Host extends React.Component {
                             placeholder="The Youtube link to be shared"
                             type="url"
                             name="youtubeLink"
+                            required
                           ></input>
                         </div>
                       </div>
