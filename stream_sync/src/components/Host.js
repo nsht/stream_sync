@@ -1,18 +1,24 @@
 import React from "react";
 import "../css/App.css";
 import Navbar from "./Navbar";
-
+import { createHost } from "../utils/webRTC_utils";
+import { Redirect } from "react-router-dom";
+import { store_data } from "../utils/data_storage_utils";
 class Host extends React.Component {
   state = {
-    host_name: "",
+    user_name: "",
     room_name: "",
-    youtube_video_id: ""
+    youtube_video_id: "",
+    host_peer_id: null,
+    is_host: true
   };
   handleSubmit = e => {
     e.preventDefault();
     var video_id = this.parseIdFromURL(e.target.youtubeLink.value);
+    const peer_id = createHost(this);
+
     this.setState({
-      host_name: e.target.userName.value,
+      user_name: e.target.userName.value,
       room_name: e.target.roomName.value,
       youtube_video_id: video_id
     });
@@ -29,6 +35,21 @@ class Host extends React.Component {
     }
   };
   render() {
+    console.log(this.state.host_peer_id);
+    if (this.state.host_peer_id) {
+      store_data(this.state.host_peer_id, this.state);
+
+      return (
+        // https://stackoverflow.com/questions/48731207/react-router-dom-and-redirect-not-being-added-to-history
+        <Redirect
+          push
+          to={{
+            pathname: "party/" + this.state.host_peer_id,
+            state: this.state
+          }}
+        ></Redirect>
+      );
+    }
     return (
       <>
         <Navbar></Navbar>
