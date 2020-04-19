@@ -6,20 +6,34 @@ import { createHost, global_this_obj } from "../utils/webRTC_utils";
 
 // https://stackoverflow.com/questions/54017100/how-to-integrate-youtube-iframe-api-in-reactjs-solution
 class Party extends React.Component {
-  state = {};
+  state = {
+    user_name: "",
+    room_name: "",
+    youtube_video_id: "",
+    host_peer_id: "",
+    is_host: false,
+    chat_log: []
+  };
+
   constructor(props) {
     super(props);
     window.global_this_obj = this;
+  }
+  componentDidMount() {
+    var host_peer_id = this.props.match.params.host_id;
+    this.setState({ host_peer_id });
     var data = get_data(this.props.match.params.host_id);
+
     if (data) {
-      console.log("huh?");
-      console.log(data);
+      this.setState({
+        user_name: data.user_name,
+        youtube_video_id: data.youtube_video_id,
+        room_name: data.room_name,
+        is_host: data.is_host
+      });
     }
   }
-
   render() {
-    console.log(this.state);
-
     return (
       <div>
         <Navbar></Navbar>
