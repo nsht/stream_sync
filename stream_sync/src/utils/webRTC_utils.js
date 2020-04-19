@@ -7,10 +7,10 @@ export function createHost(thisObj) {
   var connections = [];
 
   var peer = new Peer({ debug: 2 });
-//   var peer = new Peer("spwswf4jykh00000");
+  //   var peer = new Peer("spwswf4jykh00000");
   peer.on("open", function(id) {
     thisObj.setState({
-      host_peer_id: peer.id,
+      host_peer_id: peer.id
     });
   });
 
@@ -37,8 +37,10 @@ export function createHost(thisObj) {
 }
 
 function data_handler(data) {
-    window.global_this_obj.setState({
-    chat_data: data
+  var chat_log = window.global_this_obj.state.chat_log;
+  chat_log.push(data);
+  window.global_this_obj.setState({
+    chat_log: chat_log
   });
   //?How in the fuck will we pass data to react???
   // Sol1: move the functs to react and do this.set state?
@@ -46,3 +48,12 @@ function data_handler(data) {
   // sol3:worst case scenario store in localstorage and poll that shit in react :nope:
   //redux/mobx ugh?
 }
+
+
+// {
+//   "data_type": "chat|youtube|webrtc",
+//   "user_name": "Nishit",
+//   "user_type": "Host|Client",
+//   "message": "Test",
+//   "time_stamp": "ISO timestamp"
+// }
