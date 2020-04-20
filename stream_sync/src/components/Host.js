@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/App.css";
 import Navbar from "./Navbar";
-import { createHost } from "../utils/webRTC_utils";
+import { createConnection } from "../utils/webRTC_utils";
 import { Redirect } from "react-router-dom";
 import { store_data } from "../utils/data_storage_utils";
 class Host extends React.Component {
@@ -15,7 +15,7 @@ class Host extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     var video_id = this.parseIdFromURL(e.target.youtubeLink.value);
-    const peer_id = createHost(this);
+    const peer_id = createConnection(this);
 
     this.setState({
       user_name: e.target.userName.value,

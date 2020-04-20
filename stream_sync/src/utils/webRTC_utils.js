@@ -1,5 +1,7 @@
 export var global_this_obj = null;
-export function createHost(thisObj) {
+
+
+export function createConnection(thisObj) {
   const Peer = window.Peer;
   console.log(thisObj);
   var lastPeerId = null;
@@ -7,7 +9,7 @@ export function createHost(thisObj) {
   var connections = [];
 
   var peer = new Peer({ debug: 2 });
-  //   var peer = new Peer("spwswf4jykh00000");
+    // var peer = new Peer("test_nishit");
   peer.on("open", function(id) {
     thisObj.setState({
       host_peer_id: peer.id
@@ -16,12 +18,12 @@ export function createHost(thisObj) {
 
   //   Initializes connection
   peer.on("connection", function(conn) {
-    console.log("connection called deus");
+    console.log("connection called");
     handle_connection(conn);
   });
 
   function handle_connection(conn) {
-    peer_ids.push(conn.peer);
+    window.peer_ids.push(conn.peer);
     conn.on("data", function(data) {
       console.log(data);
       data_handler(data);
@@ -30,25 +32,28 @@ export function createHost(thisObj) {
     conn.on("close", function() {
       conn = null;
     });
-    connections.push(conn);
-    // broadcast_new_connection(conn.peer);
+
+    window.connections.push(conn);
+    // broadcast_new_connection(conn.peer); TODO
   }
   return peer.id;
 }
 
 function data_handler(data) {
+  if (typeof data === "object" && data !== null) {
+    if (data.type == "chat") {
+      chat_handler(data);
+    }
+  }
+}
+
+function chat_handler(chat_data) {
   var chat_log = window.global_this_obj.state.chat_log;
-  chat_log.push(data);
+  chat_log.push(chat_data);
   window.global_this_obj.setState({
     chat_log: chat_log
   });
-  //?How in the fuck will we pass data to react???
-  // Sol1: move the functs to react and do this.set state?
-  // Sol2: pass the this object like in create host
-  // sol3:worst case scenario store in localstorage and poll that shit in react :nope:
-  //redux/mobx ugh?
 }
-
 
 // {
 //   "data_type": "chat|youtube|webrtc",

@@ -67,3 +67,52 @@ code {
   background: aquamarine;
   border-left: 2px solid black;
 }
+
+.emoji-mart-scroll {
+  border-bottom: 0;
+  margin-bottom: 6px;
+}
+
+.emoji-mart-scroll + .emoji-mart-bar {
+  display: none;
+}
+
+.emoji {
+  font-weight: 400;
+  font-family: apple color emoji, segoe ui emoji, noto color emoji,
+    android emoji, emojisymbols, emojione mozilla, twemoji mozilla,
+    segoe ui symbol;
+  font-size: 1.2em;
+}
+
+.emoji-button {
+  border: none;
+}
+
+.emoji-button:hover {
+  border: none;
+}
+
+.chat_box {
+  height: 70vh;
+}
+
+.chat-bubble {
+  /* background-color: #fff;
+  border-radius: 21px; */
+  /* width: 200px; */
+  /* height: auto;
+  padding: 10px;
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+  position: relative; */
+}
+
+.chat_user_name {
+  /* font-size: 0.7em; */
+  margin: 0 17px 2px 0;
+  color: grey;
+}
+
+.self {
+  float: right;
+}
