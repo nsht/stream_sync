@@ -15,7 +15,7 @@ class Host extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     var video_id = this.parseIdFromURL(e.target.youtubeLink.value);
-    const peer_id = createConnection(this);
+    const peer_id = createConnection(this, true);
 
     this.setState({
       user_name: e.target.userName.value,
