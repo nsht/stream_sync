@@ -68,6 +68,10 @@ code {
   border-left: 2px solid black;
 }
 
+.emoji-mart {
+  position: absolute;
+  top: 23%;
+}
 .emoji-mart-scroll {
   border-bottom: 0;
   margin-bottom: 6px;
@@ -95,6 +99,7 @@ code {
 
 .chat_box {
   height: 70vh;
+  overflow-y: auto;
 }
 
 .chat-bubble {
