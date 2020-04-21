@@ -30,7 +30,7 @@
       var message = document.getElementById("message");
 
       var peer = new Peer();
-      connect_to_peer("z5p9ej01o8000000");
+      connect_to_peer("gq8cijrtdnd00000");
 
       peer.on("connection", function(conn) {
         handle_connection(conn);
@@ -63,7 +63,6 @@
           if (t < 10) t = "0" + t;
           return t;
         }
-
         message.innerHTML =
           '<br><span class="msg-time">' +
           h +
@@ -72,7 +71,7 @@
           ":" +
           s +
           "</span>  -  " +
-          msg +
+          JSON.stringify(msg) +
           message.innerHTML;
       }
 
