@@ -1,9 +1,18 @@
 import React from "react";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
+import { send_chat } from "../utils/webRTC_utils";
+import ChatBubble from "./ChatBubble";
 class Chat extends React.Component {
+  constructor(props) {
+    super(props);
+    var chat_log = this.props.chat_log;
+    var user_name = this.props.user_name;
+    var is_host = this.props.is_host;
+  }
   state = {
-    showEmojis: false
+    showEmojis: false,
+    message: ""
   };
   showEmojis = e => {
     this.setState({
@@ -19,26 +28,28 @@ class Chat extends React.Component {
   };
 
   addEmoji = e => {
-    // console.log(e.native);
     let emoji = e.native;
     this.setState({
-      text: this.state.text + emoji
+      message: this.state.message + emoji
     });
     this.closeMenu();
+  };
+
+  add_text = e => {
+    this.setState({ message: e.target.value });
+  };
+  send_message = () => {
+    send_chat(this.state.message, this.props.user_name, this.props.is_host);
+    this.setState({ message: "" });
   };
 
   render() {
     return (
       <div className="box">
         <div className="box chat_box">
-          <div className="chat-bubble">
-            <span className="chat_user_name"> Nishit:</span>
-            This is some text
-          </div>
-          <div className="chat-bubble">
-            <span className="chat_user_name"> Nishit:</span>
-            This is some text
-          </div>
+          {this.props.chat_log.map((chat_data, index) => {
+            return <ChatBubble chat_data={chat_data}></ChatBubble>;
+          })}
         </div>
         <div class="field is-grouped">
           <p className="">
@@ -48,10 +59,6 @@ class Chat extends React.Component {
                 ref={el => (this.emojiPicker = el)}
               />
             ) : (
-
-
-
-                
               <button class="button emoji-button">
                 <span class="icon is-small">
                   <p onClick={this.showEmojis} className="emoji">
@@ -62,10 +69,18 @@ class Chat extends React.Component {
             )}
           </p>
           <p class="control is-expanded">
-            <input class="input" type="text" placeholder="Chat.." />
+            <input
+              class="input"
+              value={this.state.message}
+              type="text"
+              placeholder="Chat.."
+              onChange={this.add_text}
+            />
           </p>
           <p class="control">
-            <a class="button is-info">Chat</a>
+            <a class="button is-info" onClick={this.send_message}>
+              Send
+            </a>
           </p>
         </div>
       </div>
