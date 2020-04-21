@@ -23,30 +23,65 @@ class Party extends React.Component {
     window.connections = [];
   }
   componentDidMount() {
+    console.log("Component Mounted");
     var peer_id = this.props.match.params.host_id;
     this.setState({ peer_id });
     var data = get_data(this.props.match.params.host_id);
 
     if (data) {
       this.setState({
+        peer_id: this.props.match.params.host_id,
         user_name: data.user_name,
         youtube_video_id: data.youtube_video_id,
         room_name: data.room_name,
         is_host: data.is_host
       });
+    } else {
+      createConnection(this, false, this.props.match.params.host_id);
     }
   }
   render() {
+    if (this.state.user_name == "") {
+    }
     console.log(window.connections);
     return (
       <div>
         <Navbar></Navbar>
+        <div
+          className={
+            "modal   " + (this.state.user_name == "" ? "is-active" : "")
+          }
+        >
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <div className="box">
+              <p>You have been invited by: Nishit</p>
+              <div class="field is-grouped">
+                <p class="control is-expanded">
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="Enter Your Username"
+                  />
+                </p>
+                <p class="control">
+                  <a class="button is-info">Party🎉</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <button class="modal-close is-large" aria-label="close"></button>
+        </div>
         <div className="section">
           <div className="container">
             <div className="tile is-ancestor">
               <div className="tile is-8">Player</div>
               <div className="tile">
-                <Chat></Chat>
+                <Chat
+                  user_name={this.state.user_name}
+                  chat_log={this.state.chat_log}
+                  is_host={this.state.is_host}
+                ></Chat>
               </div>
             </div>
           </div>
