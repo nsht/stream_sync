@@ -9,7 +9,13 @@ class Chat extends React.Component {
     var chat_log = this.props.chat_log;
     var user_name = this.props.user_name;
     var is_host = this.props.is_host;
+    this.chatBottom = React.createRef();
   }
+
+  componentDidUpdate() {
+    this.chatBottom.current.scrollIntoView({ behavior: "smooth" });
+  }
+  
   state = {
     showEmojis: false,
     message: ""
@@ -20,8 +26,6 @@ class Chat extends React.Component {
     });
   };
   closeMenu = () => {
-    console.log(this.emojiPicker);
-
     this.setState({
       showEmojis: false
     });
@@ -38,6 +42,7 @@ class Chat extends React.Component {
   add_text = e => {
     this.setState({ message: e.target.value });
   };
+
   send_message = () => {
     send_chat(this.state.message, this.props.user_name, this.props.is_host);
     this.setState({ message: "" });
@@ -50,6 +55,7 @@ class Chat extends React.Component {
           {this.props.chat_log.map((chat_data, index) => {
             return <ChatBubble chat_data={chat_data}></ChatBubble>;
           })}
+          <span ref={this.chatBottom} id="chat-bottom" />
         </div>
         <div class="field is-grouped">
           <p className="">
