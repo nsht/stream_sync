@@ -22,8 +22,8 @@ class Party extends React.Component {
     window.peer_ids = [];
     window.connections = [];
   }
+
   componentDidMount() {
-    console.log("Component Mounted");
     var peer_id = this.props.match.params.host_id;
     this.setState({ peer_id });
     var data = get_data(this.props.match.params.host_id);
@@ -37,13 +37,16 @@ class Party extends React.Component {
         is_host: data.is_host
       });
     } else {
+      // Not a host: Create connection
       createConnection(this, false, this.props.match.params.host_id);
     }
   }
+
+  setUserName = e => {
+    e.preventDefault();
+    this.setState({ user_name: e.target.user_name.value });
+  };
   render() {
-    if (this.state.user_name == "") {
-    }
-    console.log(window.connections);
     return (
       <div>
         <Navbar></Navbar>
@@ -55,23 +58,29 @@ class Party extends React.Component {
           <div class="modal-background"></div>
           <div class="modal-content">
             <div className="box">
-              <p>You have been invited by: Nishit</p>
-              <div class="field is-grouped">
-                <p class="control is-expanded">
-                  <input
-                    class="input"
-                    type="text"
-                    placeholder="Enter Your Username"
-                  />
-                </p>
-                <p class="control">
-                  <a class="button is-info">Party🎉</a>
-                </p>
-              </div>
+              <form onSubmit={this.setUserName}>
+                <div class="field is-grouped">
+                  <p class="control is-expanded">
+                    <input
+                      class="input"
+                      type="text"
+                      name="user_name"
+                      placeholder="Enter Your Username"
+                      required
+                    />
+                  </p>
+                  <p class="control">
+                    <button className="button is-primary is-light is-right">
+                      Party🎉
+                    </button>
+                  </p>
+                </div>
+              </form>
             </div>
           </div>
           <button class="modal-close is-large" aria-label="close"></button>
         </div>
+
         <div className="section">
           <div className="container">
             <div className="tile is-ancestor">
