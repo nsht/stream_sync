@@ -10,7 +10,8 @@ class Host extends React.Component {
     room_name: "",
     youtube_video_id: "",
     host_peer_id: null,
-    is_host: true
+    is_host: true,
+    submitted: false
   };
   handleSubmit = e => {
     e.preventDefault();
@@ -20,7 +21,8 @@ class Host extends React.Component {
     this.setState({
       user_name: e.target.userName.value,
       room_name: e.target.roomName.value,
-      youtube_video_id: video_id
+      youtube_video_id: video_id,
+      submitted: true
     });
   };
   parseIdFromURL = url => {
@@ -103,7 +105,12 @@ class Host extends React.Component {
                         </div>
                       </div>
                       <div className="buttons is-right">
-                        <button className="button is-primary is-light is-right">
+                        <button
+                          className={
+                            "button is-primary is-right" +
+                            (this.state.submitted ? " is-loading" : "")
+                          }
+                        >
                           Party🎉{" "}
                         </button>
                       </div>
