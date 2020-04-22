@@ -2,15 +2,9 @@ export var global_this_obj = null;
 
 export function createConnection(thisObj, is_host, host_id = null) {
   const Peer = window.Peer;
-  console.log(thisObj);
-  var lastPeerId = null;
-  var peer_ids = [];
-  var connections = [];
-  if (is_host === true) {
-    var peer = new Peer({ debug: 2 });
-  } else {
-    var peer = new Peer({ debug: 2 });
+  var peer = new Peer({ debug: 2 });
 
+  if (is_host !== true) {
     var conn = peer.connect(host_id);
     handle_connection(conn);
   }
@@ -55,6 +49,7 @@ function data_handler(data) {
   }
 }
 
+// Chat utils
 function chat_handler(chat_data) {
   var chat_log = window.global_this_obj.state.chat_log;
   chat_data.message = decodeURIComponent(
