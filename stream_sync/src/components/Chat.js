@@ -15,7 +15,7 @@ class Chat extends React.Component {
   componentDidUpdate() {
     this.chatBottom.current.scrollIntoView({ behavior: "smooth" });
   }
-  
+
   state = {
     showEmojis: false,
     message: ""
@@ -43,7 +43,8 @@ class Chat extends React.Component {
     this.setState({ message: e.target.value });
   };
 
-  send_message = () => {
+  send_message = e => {
+    e.preventDefault();
     send_chat(this.state.message, this.props.user_name, this.props.is_host);
     this.setState({ message: "" });
   };
@@ -57,38 +58,40 @@ class Chat extends React.Component {
           })}
           <span ref={this.chatBottom} id="chat-bottom" />
         </div>
-        <div class="field is-grouped">
-          <p className="">
-            {this.state.showEmojis ? (
-              <Picker
-                onSelect={this.addEmoji}
-                ref={el => (this.emojiPicker = el)}
+        <form onSubmit={this.send_message}>
+          <div class="field is-grouped">
+            <p className="">
+              {this.state.showEmojis ? (
+                <Picker
+                  onSelect={this.addEmoji}
+                  ref={el => (this.emojiPicker = el)}
+                />
+              ) : (
+                <button class="button emoji-button">
+                  <span class="icon is-small">
+                    <p onClick={this.showEmojis} className="emoji">
+                      {String.fromCodePoint(0x1f60a)}
+                    </p>
+                  </span>
+                </button>
+              )}
+            </p>
+            <p class="control is-expanded">
+              <input
+                class="input"
+                value={this.state.message}
+                type="text"
+                placeholder="Chat.."
+                onChange={this.add_text}
               />
-            ) : (
-              <button class="button emoji-button">
-                <span class="icon is-small">
-                  <p onClick={this.showEmojis} className="emoji">
-                    {String.fromCodePoint(0x1f60a)}
-                  </p>
-                </span>
+            </p>
+            <p class="control">
+              <button class="button is-info" type="submit">
+                Send
               </button>
-            )}
-          </p>
-          <p class="control is-expanded">
-            <input
-              class="input"
-              value={this.state.message}
-              type="text"
-              placeholder="Chat.."
-              onChange={this.add_text}
-            />
-          </p>
-          <p class="control">
-            <a class="button is-info" onClick={this.send_message}>
-              Send
-            </a>
-          </p>
-        </div>
+            </p>
+          </div>
+        </form>
       </div>
     );
   }
