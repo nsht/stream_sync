@@ -2,6 +2,7 @@ import React from "react";
 import "../css/App.css";
 import Navbar from "./Navbar";
 import Chat from "./Chat";
+import Player from "./Player";
 import { get_data } from "../utils/data_storage_utils";
 import { createConnection, global_this_obj } from "../utils/webRTC_utils";
 
@@ -46,6 +47,7 @@ class Party extends React.Component {
     e.preventDefault();
     this.setState({ user_name: e.target.user_name.value });
   };
+
   render() {
     return (
       <div>
@@ -84,7 +86,9 @@ class Party extends React.Component {
         <div className="section">
           <div className="container">
             <div className="tile is-ancestor">
-              <div className="tile is-8">Player</div>
+              <div className="tile is-8">
+                <Player youtube_video_id={this.state.youtube_video_id}></Player>
+              </div>
               <div className="tile">
                 <Chat
                   user_name={this.state.user_name}
@@ -95,8 +99,6 @@ class Party extends React.Component {
             </div>
           </div>
         </div>
-
-        <div id="player"></div>
       </div>
     );
   }
