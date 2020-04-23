@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Chat from "./Chat";
 import Player from "./Player";
 import { get_data } from "../utils/data_storage_utils";
-import { createConnection, global_this_obj } from "../utils/webRTC_utils";
+import { createConnection } from "../utils/webRTC_utils";
 
 // https://stackoverflow.com/questions/54017100/how-to-integrate-youtube-iframe-api-in-reactjs-solution
 class Party extends React.Component {
@@ -54,7 +54,7 @@ class Party extends React.Component {
         <Navbar></Navbar>
         <div
           className={
-            "modal   " + (this.state.user_name == "" ? "is-active" : "")
+            "modal   " + (this.state.user_name === "" ? "is-active" : "")
           }
         >
           <div class="modal-background"></div>
@@ -73,7 +73,7 @@ class Party extends React.Component {
                   </p>
                   <p class="control">
                     <button className="button is-primary is-light is-right">
-                      Party🎉
+                      Party <span role="img" aria-label="party_emoji">🎉</span>
                     </button>
                   </p>
                 </div>

@@ -6,9 +6,6 @@ import ChatBubble from "./ChatBubble";
 class Chat extends React.Component {
   constructor(props) {
     super(props);
-    var chat_log = this.props.chat_log;
-    var user_name = this.props.user_name;
-    var is_host = this.props.is_host;
     this.chatBottom = React.createRef();
   }
 
@@ -45,6 +42,9 @@ class Chat extends React.Component {
 
   send_message = e => {
     e.preventDefault();
+    if(this.state.message === ""){
+      return;
+    }
     send_chat(this.state.message, this.props.user_name, this.props.is_host);
     this.setState({ message: "" });
   };
