@@ -1,12 +1,20 @@
 import React from "react";
 
 class Player extends React.Component {
-  state = {
-    player: ""
-  };
-  componentDidMount = () => {
-    // On mount, check to see if the API script is already loaded
-
+  constructor(props) {
+    super(props);
+    // Don't call this.setState() here!
+    console.log(props);
+    this.state = {
+      player: ""
+    };
+  }
+  componentDidUpdate() {
+    if (this.state.player === "") {
+      this.loadScript();
+    }
+  }
+  loadScript = () => {
     if (!window.YT) {
       // If not, load the script asynchronously
       const tag = document.createElement("script");
@@ -22,14 +30,7 @@ class Player extends React.Component {
       this.loadVideo();
     }
   };
-
   loadVideo = () => {
-    // const { id } = this.props;
-
-    // the Player object is created uniquely based on the id in props
-    if (!this.props.youtube_video_id) {
-      return;
-    }
     this.state.player = new window.YT.Player(`youtube-player-iframe`, {
       videoId: this.props.youtube_video_id,
       events: {
@@ -50,9 +51,9 @@ class Player extends React.Component {
     console.log(event);
   };
   render() {
-    if (!this.props.youtube_video_id) {
-      return <div>Video not loaded</div>;
-    }
+    // if (!this.props.youtube_video_id) {
+    //   return <div>Video not loaded</div>;
+    // }
     return (
       <div className="player_container">
         <div id={`youtube-player-iframe`} />
