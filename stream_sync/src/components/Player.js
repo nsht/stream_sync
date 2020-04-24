@@ -3,14 +3,15 @@ import React from "react";
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    // Don't call this.setState() here!
     console.log(props);
     this.state = {
       player: ""
     };
   }
   componentDidUpdate() {
-    if (this.state.player === "") {
+    console.log("component did update");
+    console.log(this.props.youtube_video_id);
+    if (this.state.player === "" && this.props.youtube_video_id !== "") {
       this.loadScript();
     }
   }
@@ -33,12 +34,17 @@ class Player extends React.Component {
   loadVideo = () => {
     this.state.player = new window.YT.Player(`youtube-player-iframe`, {
       videoId: this.props.youtube_video_id,
+      playerVars: {
+        autoplay: 1,
+        start: Math.ceil(this.props.youtube_current_pos)
+      },
       events: {
         onReady: this.onPlayerReady,
         onStateChange: this.onPlayerStateChange,
         onPlaybackRateChange: this.onPlayerPlaybackRateChange
       }
     });
+    window.yt_player = this.state.player;
   };
 
   onPlayerReady = event => {
