@@ -12,6 +12,7 @@ class Party extends React.Component {
     user_name: "",
     room_name: "",
     youtube_video_id: "",
+    youtube_current_pos: 0,
     peer_id: "",
     is_host: false,
     chat_log: []
@@ -73,7 +74,10 @@ class Party extends React.Component {
                   </p>
                   <p class="control">
                     <button className="button is-primary is-light is-right">
-                      Party <span role="img" aria-label="party_emoji">🎉</span>
+                      Party{" "}
+                      <span role="img" aria-label="party_emoji">
+                        🎉
+                      </span>
                     </button>
                   </p>
                 </div>
@@ -87,7 +91,10 @@ class Party extends React.Component {
           <div className="container">
             <div className="tile is-ancestor">
               <div className="tile is-8">
-                <Player youtube_video_id={this.state.youtube_video_id}></Player>
+                <Player
+                  youtube_video_id={this.state.youtube_video_id}
+                  youtube_current_pos={this.state.youtube_current_pos}
+                ></Player>
               </div>
               <div className="tile">
                 <Chat
