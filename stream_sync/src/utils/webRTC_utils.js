@@ -2,7 +2,12 @@ export var global_this_obj = null;
 
 export function createConnection(thisObj, is_host, host_id = null) {
   const Peer = window.Peer;
-  var peer = new Peer({ debug: 2 });
+  var peer = new Peer({
+    debug: 2,
+    host: "116.203.130.35",
+    port: 9000,
+    path: "/myapp"
+  });
   window.peer_obj = peer;
   window.is_host = is_host;
   if (is_host !== true) {
@@ -37,11 +42,12 @@ function handle_connection(conn) {
   });
 
   window.connections.push(conn);
-  // TODO if host send youtube data here
-  // setTimeout(function() {
-  //   send_data(window.global_this_obj.state);
-  // }, 500);
+
   if (window.is_host === true) {
+    setTimeout(function() {
+      var msg_data = fetch_current_video_status();
+      send_data(msg_data);
+    }, 500);
     broadcast_new_connection(conn.peer);
   }
 }
@@ -52,6 +58,8 @@ function data_handler(data) {
       chat_handler(data);
     } else if (data.data_type === "new_connection") {
       connect_to_peer(data.peer_id);
+    } else if (data.data_type === "youtube") {
+      handle_youtube(data);
     }
   }
 }
@@ -108,6 +116,40 @@ function generate_chat_structure(msg, user_name, is_host) {
   return format;
 }
 
+//  Youtube utils
+
+function handle_youtube(data) {
+  var state = window.global_this_obj.state;
+  if (state.youtube_video_id == "") {
+    window.global_this_obj.setState({
+      youtube_video_id: data.videoId,
+      youtube_current_pos: Math.ceil(data.startSeconds)
+    });
+  }
+}
+
+function fetch_current_video_status(event) {
+  var yt_event;
+  const player = window.yt_player;
+  if (event != null) {
+    yt_event = event;
+  } else {
+    yt_event = player.getPlayerState();
+  }
+  var videoId = player.getVideoData()["video_id"];
+  var startSeconds = player.getCurrentTime();
+  var playbackRate = player.getPlaybackRate();
+
+  var payload = {
+    data_type: "youtube",
+    event: yt_event,
+    videoId: videoId,
+    startSeconds: startSeconds,
+    playbackRate: playbackRate
+  };
+
+  return payload;
+}
 // {
 //   "data_type": "chat|youtube|webrtc",
 //   "user_name": "Nishit",
