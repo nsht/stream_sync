@@ -15,7 +15,8 @@ class Party extends React.Component {
     youtube_current_pos: 0,
     peer_id: "",
     is_host: false,
-    chat_log: []
+    chat_log: [],
+    invite_popup_shown: false
   };
 
   constructor(props) {
@@ -49,6 +50,14 @@ class Party extends React.Component {
     this.setState({ user_name: e.target.user_name.value });
   };
 
+  copyToClipboard = e => {
+    e.preventDefault();
+    this.copy_invite.select();
+    var url = e.target.invite_link.value;
+    document.execCommand("copy");
+    this.setState({ invite_popup_shown: true });
+  };
+
   render() {
     return (
       <div>
@@ -77,6 +86,46 @@ class Party extends React.Component {
                       Party{" "}
                       <span role="img" aria-label="party_emoji">
                         🎉
+                      </span>
+                    </button>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+          <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+
+        <div
+          className={
+            "modal " +
+            (this.state.invite_popup_shown === false &&
+            this.state.is_host === true
+              ? "is-active"
+              : "")
+          }
+        >
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <div className="box">
+              <form onSubmit={this.copyToClipboard}>
+                <label>Share the link with friends to stream together</label>
+
+                <div class="field is-grouped">
+                  <p class="control is-expanded">
+                    <input
+                      class="input"
+                      type="text"
+                      value={window.location.href}
+                      name="invite_link"
+                      ref={copy_invite => (this.copy_invite = copy_invite)}
+                    />
+                  </p>
+                  <p class="control">
+                    <button className="button is-primary is-light is-right">
+                      Copy to clipboard
+                      <span role="img" aria-label="cliboard_emoji">
+                        📋
                       </span>
                     </button>
                   </p>
