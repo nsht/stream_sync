@@ -29,9 +29,11 @@ export function createConnection(thisObj, is_host, host_id = null) {
 
   peer.on("open", function(id) {
     console.log("MY peer ID is " + peer.id);
-    thisObj.setState({
-      host_peer_id: peer.id
-    });
+    if (window.is_host === true) {
+      thisObj.setState({
+        host_peer_id: peer.id
+      });
+    }
   });
 
   //   Initializes connection
@@ -64,7 +66,7 @@ function handle_connection(conn) {
   }
 }
 function data_handler(data) {
-  console.log("Data received: ")
+  console.log("Data received: ");
   console.log(data);
   if (typeof data === "object" && data !== null) {
     if (data.data_type === "chat") {
@@ -73,6 +75,8 @@ function data_handler(data) {
       connect_to_peer(data.peer_id);
     } else if (data.data_type === "youtube") {
       handle_youtube(data);
+    } else if (data.data_type === "intro") {
+      handle_intro(data);
     }
   }
 }
@@ -172,3 +176,22 @@ function fetch_current_video_status(event) {
 //   "message": "Test",
 //   "time_stamp": "ISO timestamp"
 // }
+
+// misc
+
+function handle_intro(data) {
+  var connected_users = window.global_this_obj.state.connected_users;
+  connected_users[data.peer_id] = { user_name: data.user_name };
+  window.global_this_obj.setState({ connected_users: connected_users });
+  window.global_this_obj.notify(` ${data.user_name} has joined the party`);
+}
+
+export function introduce(user_name) {
+  var format = {
+    data_type: "intro",
+    user_name: user_name,
+    peer_id: window.peer_obj.id,
+    time_stamp: Date.now()
+  };
+  send_data(format);
+}

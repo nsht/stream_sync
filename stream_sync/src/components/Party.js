@@ -1,10 +1,14 @@
 import React from "react";
-import "../css/App.css";
 import Navbar from "./Navbar";
 import Chat from "./Chat";
 import Player from "./Player";
 import { get_data } from "../utils/data_storage_utils";
-import { createConnection } from "../utils/webRTC_utils";
+import { createConnection, introduce } from "../utils/webRTC_utils";
+import { ToastContainer, toast } from "react-toastify";
+
+// css
+import "../css/App.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 // https://stackoverflow.com/questions/54017100/how-to-integrate-youtube-iframe-api-in-reactjs-solution
 class Party extends React.Component {
@@ -16,7 +20,8 @@ class Party extends React.Component {
     peer_id: "",
     is_host: false,
     chat_log: [],
-    invite_popup_shown: false
+    invite_popup_shown: false,
+    connected_users: {}
   };
 
   constructor(props) {
@@ -48,6 +53,7 @@ class Party extends React.Component {
   setUserName = e => {
     e.preventDefault();
     this.setState({ user_name: e.target.user_name.value });
+    introduce(e.target.user_name.value);
   };
 
   copyToClipboard = e => {
@@ -62,10 +68,33 @@ class Party extends React.Component {
     this.setState({ invite_popup_shown: true });
   };
 
+  notify = message => {
+    toast.info(message, {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined
+    });
+  };
+
   render() {
     return (
       <div>
         <Navbar></Navbar>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div
           className={
             "modal   " + (this.state.user_name === "" ? "is-active" : "")
