@@ -42,7 +42,7 @@ class Chat extends React.Component {
 
   send_message = e => {
     e.preventDefault();
-    if(this.state.message === ""){
+    if (this.state.message === "") {
       return;
     }
     send_chat(this.state.message, this.props.user_name, this.props.is_host);
@@ -52,7 +52,7 @@ class Chat extends React.Component {
   render() {
     return (
       <div className="box">
-        <div className="box chat_box">
+        <div className="box chat_box" onClick={this.closeMenu}>
           {this.props.chat_log.map((chat_data, index) => {
             return <ChatBubble chat_data={chat_data}></ChatBubble>;
           })}
@@ -62,10 +62,19 @@ class Chat extends React.Component {
           <div class="field is-grouped">
             <p className="">
               {this.state.showEmojis ? (
-                <Picker
-                  onSelect={this.addEmoji}
-                  ref={el => (this.emojiPicker = el)}
-                />
+                <>
+                  <Picker
+                    onSelect={this.addEmoji}
+                    ref={el => (this.emojiPicker = el)}
+                  />
+                  <button class="button emoji-button">
+                    <span class="icon is-small">
+                      <p onClick={this.closeMenu} className="emoji">
+                        {"❌"}
+                      </p>
+                    </span>
+                  </button>
+                </>
               ) : (
                 <button class="button emoji-button">
                   <span class="icon is-small">
@@ -86,9 +95,7 @@ class Chat extends React.Component {
               />
             </p>
             <p class="control">
-              <button class="button is-info" type="submit">
-                Send
-              </button>
+              <input class="button is-info" type="submit" value="send"></input>
             </p>
           </div>
         </form>
