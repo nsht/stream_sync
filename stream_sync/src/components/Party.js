@@ -58,6 +58,10 @@ class Party extends React.Component {
     this.setState({ invite_popup_shown: true });
   };
 
+  closeModal = e => {
+    this.setState({ invite_popup_shown: true });
+  };
+
   render() {
     return (
       <div>
@@ -105,7 +109,7 @@ class Party extends React.Component {
               : "")
           }
         >
-          <div class="modal-background"></div>
+          <div class="modal-background" onClick={this.closeModal}></div>
           <div class="modal-content">
             <div className="box">
               <form onSubmit={this.copyToClipboard}>
@@ -133,7 +137,11 @@ class Party extends React.Component {
               </form>
             </div>
           </div>
-          <button class="modal-close is-large" aria-label="close"></button>
+          <button
+            class="modal-close is-large"
+            aria-label="close"
+            onClick={this.closeModal}
+          ></button>
         </div>
 
         <div className="section">
