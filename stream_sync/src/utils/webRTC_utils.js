@@ -6,7 +6,19 @@ export function createConnection(thisObj, is_host, host_id = null) {
     debug: 2,
     host: "116.203.130.35",
     port: 9000,
-    path: "/myapp"
+    path: "/myapp",
+    iceTransportPolicy: "relay",
+
+    config: {
+      iceServers: [
+        { url: "stun:stun.l.google.com:19302" },
+        {
+          url: "turn:51.15.213.116:3478",
+          username: "nishit",
+          credential: "test123"
+        }
+      ]
+    }
   });
   window.peer_obj = peer;
   window.is_host = is_host;
@@ -47,11 +59,12 @@ function handle_connection(conn) {
     setTimeout(function() {
       var msg_data = fetch_current_video_status();
       send_data(msg_data);
-    }, 500);
+    }, 2500);
     broadcast_new_connection(conn.peer);
   }
 }
 function data_handler(data) {
+  console.log("Data received: ")
   console.log(data);
   if (typeof data === "object" && data !== null) {
     if (data.data_type === "chat") {
@@ -65,6 +78,8 @@ function data_handler(data) {
 }
 
 function send_data(data) {
+  console.log("Sending data: ");
+  console.log(data);
   var connections = window.connections;
   for (var i = 0; i < connections.length; i++) {
     connections[i].send(data);
