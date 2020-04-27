@@ -34,6 +34,9 @@ export function createConnection(thisObj, is_host, host_id = null) {
         host_peer_id: peer.id
       });
     }
+    thisObj.setState({
+      peer_id: peer.id
+    });
   });
 
   //   Initializes connection
@@ -61,7 +64,12 @@ function handle_connection(conn) {
     setTimeout(function() {
       var msg_data = fetch_current_video_status();
       send_data(msg_data);
-    }, 2500);
+      var msg_user_list = {
+        data_type: "user_list",
+        user_list: window.global_this_obj.state.connected_users
+      };
+      send_data(msg_user_list);
+    }, 1500);
     broadcast_new_connection(conn.peer);
   }
 }
@@ -77,6 +85,8 @@ function data_handler(data) {
       handle_youtube(data);
     } else if (data.data_type === "intro") {
       handle_intro(data);
+    } else if (data.data_type === "user_list") {
+      handle_intro_init(data);
     }
   }
 }
@@ -181,16 +191,24 @@ function fetch_current_video_status(event) {
 
 function handle_intro(data) {
   var connected_users = window.global_this_obj.state.connected_users;
-  connected_users[data.peer_id] = { user_name: data.user_name };
+  connected_users[data.peer_id] = {
+    user_name: data.user_name,
+    color_code: data.color_code
+  };
   window.global_this_obj.setState({ connected_users: connected_users });
-  window.global_this_obj.notify(` ${data.user_name} has joined the party`);
+  window.global_this_obj.notify(`${data.user_name} has joined the party`);
 }
 
-export function introduce(user_name) {
+function handle_intro_init(data) {
+  window.global_this_obj.setState({ connected_users: data.user_list });
+}
+
+export function introduce(user_name,color_code) {
   var format = {
     data_type: "intro",
     user_name: user_name,
     peer_id: window.peer_obj.id,
+    color_code: color_code,
     time_stamp: Date.now()
   };
   send_data(format);
