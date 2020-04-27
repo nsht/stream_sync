@@ -2,10 +2,11 @@ import React from "react";
 import Navbar from "./Navbar";
 import Chat from "./Chat";
 import Player from "./Player";
+import UserList from "./UserList";
+
 import { get_data } from "../utils/data_storage_utils";
 import { createConnection, introduce } from "../utils/webRTC_utils";
 import { ToastContainer, toast } from "react-toastify";
-
 // css
 import "../css/App.css";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -32,17 +33,25 @@ class Party extends React.Component {
   }
 
   componentDidMount() {
-    var peer_id = this.props.match.params.host_id;
-    this.setState({ peer_id });
+    // var peer_id = this.props.match.params.host_id;
+    // this.setState({ peer_id });
     var data = get_data(this.props.match.params.host_id);
 
     if (data) {
+      var connected_users = {};
+      connected_users[this.props.match.params.host_id] = {
+        user_name: data.user_name,
+        color_code: Math.floor(Math.random() * 16777215).toString(16),
+        is_host: true
+      };
+
       this.setState({
         peer_id: this.props.match.params.host_id,
         user_name: data.user_name,
         youtube_video_id: data.youtube_video_id,
         room_name: data.room_name,
-        is_host: data.is_host
+        is_host: data.is_host,
+        connected_users: connected_users
       });
     } else {
       // Not a host: Create connection
@@ -52,8 +61,18 @@ class Party extends React.Component {
 
   setUserName = e => {
     e.preventDefault();
-    this.setState({ user_name: e.target.user_name.value });
-    introduce(e.target.user_name.value);
+    const user_color = Math.floor(Math.random() * 16777215).toString(16);
+    var connected_users = this.state.connected_users;
+    connected_users[this.state.peer_id] = {
+      user_name: e.target.user_name.value,
+      color_code: user_color,
+      is_host: false
+    };
+    this.setState({
+      user_name: e.target.user_name.value,
+      connected_users: connected_users
+    });
+    introduce(e.target.user_name.value, user_color);
   };
 
   copyToClipboard = e => {
@@ -176,11 +195,14 @@ class Party extends React.Component {
         <div className="section">
           <div className="container">
             <div className="tile is-ancestor">
-              <div className="tile is-8">
+              <div className="tile is-8 left_tile_custom">
                 <Player
                   youtube_video_id={this.state.youtube_video_id}
                   youtube_current_pos={this.state.youtube_current_pos}
                 ></Player>
+                <UserList
+                  connected_users={this.state.connected_users}
+                ></UserList>
               </div>
               <div className="tile">
                 <Chat
