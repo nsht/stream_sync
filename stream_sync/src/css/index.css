@@ -128,3 +128,27 @@ code {
   align-items: center;
   justify-content: center;
 }
+.left_tile_custom {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.avatar {
+  width: 30px;
+  text-align: center;
+  height: 30px;
+  background-color: green;
+  border-radius: 50%;
+  font-size: 1.2em;
+  color: white;
+  text-transform: uppercase;
+  margin: 5px;
+}
+
+.avatar_container {
+  display: flex;
+}
+
+.info_box {
+  margin: 3%;
+}
