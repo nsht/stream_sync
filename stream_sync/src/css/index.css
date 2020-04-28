@@ -103,16 +103,6 @@ code {
   overflow-y: auto;
 }
 
-.chat-bubble {
-  /* background-color: #fff;
-  border-radius: 21px; */
-  /* width: 200px; */
-  /* height: auto;
-  padding: 10px;
-  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
-  position: relative; */
-}
-
 .chat_user_name {
   /* font-size: 0.7em; */
   margin: 0 17px 2px 0;

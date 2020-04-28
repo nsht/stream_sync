@@ -17,7 +17,7 @@ class UserList extends React.Component {
           title={user.user_name}
           style={{ backgroundColor: "#" + user.color_code }}
         >
-          {user.user_name[0]} 
+          {user.user_name[0]}
         </div>
       );
     }
