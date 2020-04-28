@@ -39,6 +39,7 @@ class Party extends React.Component {
     var data = get_data(this.props.match.params.host_id);
     const color_code = Math.floor(Math.random() * 16777215).toString(16);
     if (data) {
+      console.log(window.peer_obj);
       var connected_users = {};
       connected_users[this.props.match.params.host_id] = {
         user_name: data.user_name,
@@ -122,21 +123,21 @@ class Party extends React.Component {
             "modal   " + (this.state.user_name === "" ? "is-active" : "")
           }
         >
-          <div class="modal-background"></div>
-          <div class="modal-content">
+          <div className="modal-background"></div>
+          <div className="modal-content">
             <div className="box">
               <form onSubmit={this.setUserName}>
-                <div class="field is-grouped">
-                  <p class="control is-expanded">
+                <div className="field is-grouped">
+                  <p className="control is-expanded">
                     <input
-                      class="input"
+                      className="input"
                       type="text"
                       name="user_name"
                       placeholder="Enter Your Username"
                       required
                     />
                   </p>
-                  <p class="control">
+                  <p className="control">
                     <button className="button is-primary is-light is-right">
                       Party{" "}
                       <span role="img" aria-label="party_emoji">
@@ -148,7 +149,7 @@ class Party extends React.Component {
               </form>
             </div>
           </div>
-          <button class="modal-close is-large" aria-label="close"></button>
+          <button className="modal-close is-large" aria-label="close"></button>
         </div>
 
         <div
@@ -160,23 +161,24 @@ class Party extends React.Component {
               : "")
           }
         >
-          <div class="modal-background" onClick={this.closeModal}></div>
-          <div class="modal-content">
+          <div className="modal-background" onClick={this.closeModal}></div>
+          <div className="modal-content">
             <div className="box">
               <form onSubmit={this.copyToClipboard}>
                 <label>Share the link with friends to stream together</label>
 
-                <div class="field is-grouped">
-                  <p class="control is-expanded">
+                <div className="field is-grouped">
+                  <p className="control is-expanded">
                     <input
-                      class="input"
+                      className="input"
                       type="text"
                       value={window.location.href}
                       name="invite_link"
+                      readOnly
                       ref={copy_invite => (this.copy_invite = copy_invite)}
                     />
                   </p>
-                  <p class="control">
+                  <p className="control">
                     <button className="button is-primary is-light is-right">
                       Copy to clipboard
                       <span role="img" aria-label="cliboard_emoji">
@@ -189,7 +191,7 @@ class Party extends React.Component {
             </div>
           </div>
           <button
-            class="modal-close is-large"
+            className="modal-close is-large"
             aria-label="close"
             onClick={this.closeModal}
           ></button>

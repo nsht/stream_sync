@@ -64,7 +64,7 @@ class Chat extends React.Component {
           <span ref={this.chatBottom} id="chat-bottom" />
         </div>
         <form onSubmit={this.send_message}>
-          <div class="field is-grouped">
+          <div className="field is-grouped">
             <p className="">
               {this.state.showEmojis ? (
                 <>
@@ -72,8 +72,8 @@ class Chat extends React.Component {
                     onSelect={this.addEmoji}
                     ref={el => (this.emojiPicker = el)}
                   />
-                  <button class="button emoji-button">
-                    <span class="icon is-small">
+                  <button className="button emoji-button">
+                    <span className="icon is-small">
                       <p onClick={this.closeMenu} className="emoji">
                         {"❌"}
                       </p>
@@ -81,8 +81,8 @@ class Chat extends React.Component {
                   </button>
                 </>
               ) : (
-                <button class="button emoji-button">
-                  <span class="icon is-small">
+                <button className="button emoji-button">
+                  <span className="icon is-small">
                     <p onClick={this.showEmojis} className="emoji">
                       {String.fromCodePoint(0x1f60a)}
                     </p>
@@ -90,17 +90,17 @@ class Chat extends React.Component {
                 </button>
               )}
             </p>
-            <p class="control is-expanded">
+            <p className="control is-expanded">
               <input
-                class="input"
+                className="input"
                 value={this.state.message}
                 type="text"
                 placeholder="Chat.."
                 onChange={this.add_text}
               />
             </p>
-            <p class="control">
-              <input class="button is-info" type="submit" value="send"></input>
+            <p className="control">
+              <input className="button is-info" type="submit" value="send"></input>
             </p>
           </div>
         </form>

@@ -11,8 +11,13 @@ class UserList extends React.Component {
     for (const key in connected_users) {
       var user = connected_users[key];
       avatars.push(
-        <div class="avatar" title={user.user_name} style={{ backgroundColor: "#" + user.color_code }}>
-          {user.user_name[0]}
+        <div
+          key={user}
+          className="avatar"
+          title={user.user_name}
+          style={{ backgroundColor: "#" + user.color_code }}
+        >
+          {user.user_name[0]} 
         </div>
       );
     }
