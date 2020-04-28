@@ -22,7 +22,8 @@ class Party extends React.Component {
     is_host: false,
     chat_log: [],
     invite_popup_shown: false,
-    connected_users: {}
+    connected_users: {},
+    color_code: ""
   };
 
   constructor(props) {
@@ -36,12 +37,12 @@ class Party extends React.Component {
     // var peer_id = this.props.match.params.host_id;
     // this.setState({ peer_id });
     var data = get_data(this.props.match.params.host_id);
-
+    const color_code = Math.floor(Math.random() * 16777215).toString(16);
     if (data) {
       var connected_users = {};
       connected_users[this.props.match.params.host_id] = {
         user_name: data.user_name,
-        color_code: Math.floor(Math.random() * 16777215).toString(16),
+        color_code: color_code,
         is_host: true
       };
 
@@ -51,7 +52,8 @@ class Party extends React.Component {
         youtube_video_id: data.youtube_video_id,
         room_name: data.room_name,
         is_host: data.is_host,
-        connected_users: connected_users
+        connected_users: connected_users,
+        color_code: color_code
       });
     } else {
       // Not a host: Create connection
@@ -61,18 +63,19 @@ class Party extends React.Component {
 
   setUserName = e => {
     e.preventDefault();
-    const user_color = Math.floor(Math.random() * 16777215).toString(16);
+    const color_code = Math.floor(Math.random() * 16777215).toString(16);
     var connected_users = this.state.connected_users;
     connected_users[this.state.peer_id] = {
       user_name: e.target.user_name.value,
-      color_code: user_color,
+      color_code: color_code,
       is_host: false
     };
     this.setState({
       user_name: e.target.user_name.value,
-      connected_users: connected_users
+      connected_users: connected_users,
+      color_code: color_code
     });
-    introduce(e.target.user_name.value, user_color);
+    introduce(e.target.user_name.value, color_code);
   };
 
   copyToClipboard = e => {
@@ -209,6 +212,7 @@ class Party extends React.Component {
                   user_name={this.state.user_name}
                   chat_log={this.state.chat_log}
                   is_host={this.state.is_host}
+                  color_code={this.state.color_code}
                 ></Chat>
               </div>
             </div>

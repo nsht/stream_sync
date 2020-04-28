@@ -45,7 +45,12 @@ class Chat extends React.Component {
     if (this.state.message === "") {
       return;
     }
-    send_chat(this.state.message, this.props.user_name, this.props.is_host);
+    send_chat(
+      this.state.message,
+      this.props.user_name,
+      this.props.is_host,
+      this.props.color_code
+    );
     this.setState({ message: "" });
   };
 

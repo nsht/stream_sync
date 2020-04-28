@@ -128,18 +128,19 @@ function chat_handler(chat_data) {
   });
 }
 
-export function send_chat(msg, user_name, is_host) {
-  var msg_json = generate_chat_structure(msg, user_name, is_host);
+export function send_chat(msg, user_name, is_host, color_code) {
+  var msg_json = generate_chat_structure(msg, user_name, is_host, color_code);
   send_data(msg_json);
   chat_handler(msg_json);
 }
 
-function generate_chat_structure(msg, user_name, is_host) {
+function generate_chat_structure(msg, user_name, is_host, color_code) {
   var format = {
     data_type: "chat",
     user_name: user_name,
     user_type: is_host ? "Host" : "Client",
     message: btoa(unescape(encodeURIComponent(msg))),
+    color_code: color_code,
     time_stamp: Date.now()
   };
   return format;
@@ -203,7 +204,7 @@ function handle_intro_init(data) {
   window.global_this_obj.setState({ connected_users: data.user_list });
 }
 
-export function introduce(user_name,color_code) {
+export function introduce(user_name, color_code) {
   var format = {
     data_type: "intro",
     user_name: user_name,
