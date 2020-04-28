@@ -143,6 +143,7 @@ class Party extends React.Component {
                 <Player
                   youtube_video_id={this.state.youtube_video_id}
                   youtube_current_pos={this.state.youtube_current_pos}
+                  is_host={this.state.is_host}
                 ></Player>
               </div>
               <div className="tile">
