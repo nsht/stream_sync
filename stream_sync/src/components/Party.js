@@ -5,7 +5,11 @@ import Player from "./Player";
 import UserList from "./UserList";
 
 import { get_data } from "../utils/data_storage_utils";
-import { createConnection, introduce } from "../utils/webRTC_utils";
+import {
+  createConnection,
+  introduce,
+  bulk_connect
+} from "../utils/webRTC_utils";
 import { ToastContainer, toast } from "react-toastify";
 // css
 import "../css/App.css";
@@ -34,18 +38,29 @@ class Party extends React.Component {
   }
 
   componentDidMount() {
-    // var peer_id = this.props.match.params.host_id;
-    // this.setState({ peer_id });
     var data = get_data(this.props.match.params.host_id);
     const color_code = Math.floor(Math.random() * 16777215).toString(16);
+    // i.e if host
     if (data) {
-      console.log(window.peer_obj);
-      var connected_users = {};
-      connected_users[this.props.match.params.host_id] = {
-        user_name: data.user_name,
-        color_code: color_code,
-        is_host: true
-      };
+      if (!window.peer_obj) {
+        createConnection(this, true, null, this.props.match.params.host_id);
+      }
+
+      if (!data.connected_users) {
+        var connected_users = {};
+        connected_users[this.props.match.params.host_id] = {
+          user_name: data.user_name,
+          color_code: color_code,
+          is_host: true
+        };
+      } else {
+        var connected_users = data.connected_users;
+        // https://stackoverflow.com/questions/38416020/deep-copy-in-es6-using-the-spread-syntax
+        var reconnect_users = JSON.parse(JSON.stringify(connected_users));
+
+        delete reconnect_users[this.props.match.params.host_id];
+        bulk_connect(Object.keys(reconnect_users));
+      }
 
       this.setState({
         peer_id: this.props.match.params.host_id,

@@ -1,8 +1,15 @@
+import { update_data } from "./data_storage_utils";
+
 export var global_this_obj = null;
 
-export function createConnection(thisObj, is_host, host_id = null) {
+export function createConnection(
+  thisObj,
+  is_host,
+  host_id = null,
+  previous_id = null
+) {
   const Peer = window.Peer;
-  var peer = new Peer({
+  const settings = {
     debug: 2,
     host: "116.203.130.35",
     port: 9000,
@@ -19,7 +26,14 @@ export function createConnection(thisObj, is_host, host_id = null) {
         }
       ]
     }
-  });
+  };
+
+  if (previous_id) {
+    var peer = new Peer(previous_id, settings);
+  } else {
+    var peer = new Peer(settings);
+  }
+
   window.peer_obj = peer;
   window.is_host = is_host;
   if (is_host !== true) {
@@ -115,6 +129,13 @@ function connect_to_peer(peer_id) {
   handle_connection(conn);
 }
 
+export function bulk_connect(peer_ids) {
+  for (let id in peer_ids) {
+    setTimeout(function() {
+      connect_to_peer(peer_ids[id]);
+    }, 500);
+  }
+}
 // Chat utils
 function chat_handler(chat_data) {
   var chat_log = window.global_this_obj.state.chat_log;
@@ -198,6 +219,7 @@ function handle_intro(data) {
   };
   window.global_this_obj.setState({ connected_users: connected_users });
   window.global_this_obj.notify(`${data.user_name} has joined the party`);
+  update_data(window.peer_obj.id, "connected_users", connected_users);
 }
 
 function handle_intro_init(data) {
