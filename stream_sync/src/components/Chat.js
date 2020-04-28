@@ -42,33 +42,47 @@ class Chat extends React.Component {
 
   send_message = e => {
     e.preventDefault();
-    if(this.state.message === ""){
+    if (this.state.message === "") {
       return;
     }
-    send_chat(this.state.message, this.props.user_name, this.props.is_host);
+    send_chat(
+      this.state.message,
+      this.props.user_name,
+      this.props.is_host,
+      this.props.color_code
+    );
     this.setState({ message: "" });
   };
 
   render() {
     return (
       <div className="box">
-        <div className="box chat_box">
+        <div className="box chat_box" onClick={this.closeMenu}>
           {this.props.chat_log.map((chat_data, index) => {
-            return <ChatBubble chat_data={chat_data}></ChatBubble>;
+            return <ChatBubble key={index} chat_data={chat_data}></ChatBubble>;
           })}
           <span ref={this.chatBottom} id="chat-bottom" />
         </div>
         <form onSubmit={this.send_message}>
-          <div class="field is-grouped">
+          <div className="field is-grouped">
             <p className="">
               {this.state.showEmojis ? (
-                <Picker
-                  onSelect={this.addEmoji}
-                  ref={el => (this.emojiPicker = el)}
-                />
+                <>
+                  <Picker
+                    onSelect={this.addEmoji}
+                    ref={el => (this.emojiPicker = el)}
+                  />
+                  <button className="button emoji-button">
+                    <span className="icon is-small">
+                      <p onClick={this.closeMenu} className="emoji">
+                        {"❌"}
+                      </p>
+                    </span>
+                  </button>
+                </>
               ) : (
-                <button class="button emoji-button">
-                  <span class="icon is-small">
+                <button className="button emoji-button">
+                  <span className="icon is-small">
                     <p onClick={this.showEmojis} className="emoji">
                       {String.fromCodePoint(0x1f60a)}
                     </p>
@@ -76,19 +90,17 @@ class Chat extends React.Component {
                 </button>
               )}
             </p>
-            <p class="control is-expanded">
+            <p className="control is-expanded">
               <input
-                class="input"
+                className="input"
                 value={this.state.message}
                 type="text"
                 placeholder="Chat.."
                 onChange={this.add_text}
               />
             </p>
-            <p class="control">
-              <button class="button is-info" type="submit">
-                Send
-              </button>
+            <p className="control">
+              <input className="button is-info" type="submit" value="send"></input>
             </p>
           </div>
         </form>

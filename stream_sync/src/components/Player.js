@@ -11,8 +11,6 @@ class Player extends React.Component {
     };
   }
   componentDidUpdate() {
-    console.log("component did update");
-    console.log(this.props.youtube_video_id);
     if (this.state.player === "" && this.props.youtube_video_id !== "") {
       this.loadScript();
     }
@@ -30,7 +28,9 @@ class Player extends React.Component {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     } else {
       // If script is already there, load the video directly
-      this.loadVideo();
+      if (window.YT.Player) {
+        this.loadVideo();
+      }
     }
   };
   loadVideo = () => {

@@ -16,7 +16,6 @@ class Host extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     var video_id = this.parseIdFromURL(e.target.youtubeLink.value);
-    createConnection(this, true);
 
     this.setState({
       user_name: e.target.userName.value,
@@ -24,6 +23,7 @@ class Host extends React.Component {
       youtube_video_id: video_id,
       submitted: true
     });
+    createConnection(this, true);
   };
   parseIdFromURL = url => {
     var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -40,7 +40,6 @@ class Host extends React.Component {
       store_data(this.state.host_peer_id, this.state);
 
       return (
-        // https://stackoverflow.com/questions/48731207/react-router-dom-and-redirect-not-being-added-to-history
         <Redirect
           push
           to={{

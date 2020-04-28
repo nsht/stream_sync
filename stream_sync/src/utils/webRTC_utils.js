@@ -1,8 +1,15 @@
+import { update_data } from "./data_storage_utils";
+
 export var global_this_obj = null;
 
-export function createConnection(thisObj, is_host, host_id = null) {
+export function createConnection(
+  thisObj,
+  is_host,
+  host_id = null,
+  previous_id = null
+) {
   const Peer = window.Peer;
-  var peer = new Peer({
+  const settings = {
     debug: 2,
     host: "116.203.130.35",
     port: 9000,
@@ -19,7 +26,14 @@ export function createConnection(thisObj, is_host, host_id = null) {
         }
       ]
     }
-  });
+  };
+
+  if (previous_id) {
+    var peer = new Peer(previous_id, settings);
+  } else {
+    var peer = new Peer(settings);
+  }
+
   window.peer_obj = peer;
   window.is_host = is_host;
   if (is_host !== true) {
@@ -30,8 +44,13 @@ export function createConnection(thisObj, is_host, host_id = null) {
   peer.on("open", function(id) {
     console.log("MY peer ID is " + peer.id);
     thisObj.setState({
-      host_peer_id: peer.id
+      peer_id: peer.id
     });
+    if (window.is_host === true) {
+      thisObj.setState({
+        host_peer_id: peer.id
+      });
+    }
   });
 
   //   Initializes connection
@@ -60,13 +79,18 @@ function handle_connection(conn) {
   if (window.is_host === true) {
     setTimeout(function() {
       sync_video();
-    }, 2500);
+      var msg_user_list = {
+        data_type: "user_list",
+        user_list: window.global_this_obj.state.connected_users
+      };
+      send_data(msg_user_list);
+    }, 1500);
     broadcast_new_connection(conn.peer);
   }
 }
 
 function data_handler(data) {
-  console.log("Data received: ")
+  console.log("Data received: ");
   console.log(data);
   if (typeof data === "object" && data !== null) {
     if (data.data_type === "chat") {
@@ -75,6 +99,10 @@ function data_handler(data) {
       connect_to_peer(data.peer_id);
     } else if (data.data_type === "youtube") {
       handle_youtube(data);
+    } else if (data.data_type === "intro") {
+      handle_intro(data);
+    } else if (data.data_type === "user_list") {
+      handle_intro_init(data);
     }
   }
 }
@@ -91,7 +119,7 @@ function send_data(data) {
 function broadcast_new_connection(peer_id) {
   var msg = { data_type: "new_connection", peer_id: peer_id };
   for (var i = 0; i < window.connections.length; i++) {
-    if (window.connections[i].peer == peer_id) {
+    if (window.connections[i].peer === peer_id) {
       continue;
     }
     window.connections[i].send(msg);
@@ -103,6 +131,13 @@ function connect_to_peer(peer_id) {
   handle_connection(conn);
 }
 
+export function bulk_connect(peer_ids) {
+  for (let id in peer_ids) {
+    setTimeout(function() {
+      connect_to_peer(peer_ids[id]);
+    }, 500);
+  }
+}
 // Chat utils
 function chat_handler(chat_data) {
   var chat_log = window.global_this_obj.state.chat_log;
@@ -116,18 +151,19 @@ function chat_handler(chat_data) {
   });
 }
 
-export function send_chat(msg, user_name, is_host) {
-  var msg_json = generate_chat_structure(msg, user_name, is_host);
+export function send_chat(msg, user_name, is_host, color_code) {
+  var msg_json = generate_chat_structure(msg, user_name, is_host, color_code);
   send_data(msg_json);
   chat_handler(msg_json);
 }
 
-function generate_chat_structure(msg, user_name, is_host) {
+function generate_chat_structure(msg, user_name, is_host, color_code) {
   var format = {
     data_type: "chat",
     user_name: user_name,
     user_type: is_host ? "Host" : "Client",
     message: btoa(unescape(encodeURIComponent(msg))),
+    color_code: color_code,
     time_stamp: Date.now()
   };
   return format;
@@ -137,7 +173,7 @@ function generate_chat_structure(msg, user_name, is_host) {
 
 function handle_youtube(data) {
   var state = window.global_this_obj.state;
-  if (state.youtube_video_id == "") {
+  if (state.youtube_video_id === "") {
     window.global_this_obj.setState({
       youtube_video_id: data.videoId,
       youtube_current_pos: Math.ceil(data.startSeconds)
@@ -205,3 +241,31 @@ function fetch_current_video_status(event) {
 //   "message": "Test",
 //   "time_stamp": "ISO timestamp"
 // }
+
+// misc
+
+function handle_intro(data) {
+  var connected_users = window.global_this_obj.state.connected_users;
+  connected_users[data.peer_id] = {
+    user_name: data.user_name,
+    color_code: data.color_code
+  };
+  window.global_this_obj.setState({ connected_users: connected_users });
+  window.global_this_obj.notify(`${data.user_name} has joined the party`);
+  update_data(window.peer_obj.id, "connected_users", connected_users);
+}
+
+function handle_intro_init(data) {
+  window.global_this_obj.setState({ connected_users: data.user_list });
+}
+
+export function introduce(user_name, color_code) {
+  var format = {
+    data_type: "intro",
+    user_name: user_name,
+    peer_id: window.peer_obj.id,
+    color_code: color_code,
+    time_stamp: Date.now()
+  };
+  send_data(format);
+}
