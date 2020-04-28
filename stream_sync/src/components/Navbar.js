@@ -10,39 +10,28 @@ class Navbar extends React.Component {
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
+          <div className="navbar-item" href="https://bulma.io">
             <img
-              src={process.env.PUBLIC_URL + '/logo.png'}
+              src={process.env.PUBLIC_URL + "/logo.png"}
               width="112"
               height="28"
+              alt="Logo"
             ></img>
-          </a>
-
-          <a
-            role="button"
-            className="navbar-burger burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+          </div>
         </div>
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <a className="navbar-item">Home</a>
+            <div className="navbar-item">Home</div>
           </div>
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary">
+              <div className="button is-primary">
                 <strong>Buy me a coffee</strong>
-              </a>
+              </div>
               <a href="/host" target="_blank" className="button is-light">
                 Host
               </a>

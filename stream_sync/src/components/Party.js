@@ -97,7 +97,6 @@ class Party extends React.Component {
   copyToClipboard = e => {
     e.preventDefault();
     this.copy_invite.select();
-    var url = e.target.invite_link.value;
     document.execCommand("copy");
     this.setState({ invite_popup_shown: true });
   };

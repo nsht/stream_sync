@@ -24,7 +24,6 @@ class Host extends React.Component {
       submitted: true
     });
     createConnection(this, true);
-
   };
   parseIdFromURL = url => {
     var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -41,7 +40,6 @@ class Host extends React.Component {
       store_data(this.state.host_peer_id, this.state);
 
       return (
-        // https://stackoverflow.com/questions/48731207/react-router-dom-and-redirect-not-being-added-to-history
         <Redirect
           push
           to={{

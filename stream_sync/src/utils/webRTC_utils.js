@@ -117,7 +117,7 @@ function send_data(data) {
 function broadcast_new_connection(peer_id) {
   var msg = { data_type: "new_connection", peer_id: peer_id };
   for (var i = 0; i < window.connections.length; i++) {
-    if (window.connections[i].peer == peer_id) {
+    if (window.connections[i].peer === peer_id) {
       continue;
     }
     window.connections[i].send(msg);
@@ -171,7 +171,7 @@ function generate_chat_structure(msg, user_name, is_host, color_code) {
 
 function handle_youtube(data) {
   var state = window.global_this_obj.state;
-  if (state.youtube_video_id == "") {
+  if (state.youtube_video_id === "") {
     window.global_this_obj.setState({
       youtube_video_id: data.videoId,
       youtube_current_pos: Math.ceil(data.startSeconds)
