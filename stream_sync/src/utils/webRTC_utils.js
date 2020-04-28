@@ -29,14 +29,14 @@ export function createConnection(thisObj, is_host, host_id = null) {
 
   peer.on("open", function(id) {
     console.log("MY peer ID is " + peer.id);
+    thisObj.setState({
+      peer_id: peer.id
+    });
     if (window.is_host === true) {
       thisObj.setState({
         host_peer_id: peer.id
       });
     }
-    thisObj.setState({
-      peer_id: peer.id
-    });
   });
 
   //   Initializes connection

@@ -59,7 +59,7 @@ class Chat extends React.Component {
       <div className="box">
         <div className="box chat_box" onClick={this.closeMenu}>
           {this.props.chat_log.map((chat_data, index) => {
-            return <ChatBubble chat_data={chat_data}></ChatBubble>;
+            return <ChatBubble key={index} chat_data={chat_data}></ChatBubble>;
           })}
           <span ref={this.chatBottom} id="chat-bottom" />
         </div>

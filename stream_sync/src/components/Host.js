@@ -16,7 +16,6 @@ class Host extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     var video_id = this.parseIdFromURL(e.target.youtubeLink.value);
-    createConnection(this, true);
 
     this.setState({
       user_name: e.target.userName.value,
@@ -24,6 +23,8 @@ class Host extends React.Component {
       youtube_video_id: video_id,
       submitted: true
     });
+    createConnection(this, true);
+
   };
   parseIdFromURL = url => {
     var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
