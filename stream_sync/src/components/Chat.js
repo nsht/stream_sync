@@ -100,7 +100,11 @@ class Chat extends React.Component {
               />
             </p>
             <p className="control">
-              <input className="button is-info" type="submit" value="send"></input>
+              <input
+                className="button is-info"
+                type="submit"
+                value="send"
+              ></input>
             </p>
           </div>
         </form>
