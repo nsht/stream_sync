@@ -179,7 +179,6 @@ function handle_youtube(data) {
       youtube_current_pos: Math.ceil(data.startSeconds)
     });
   }
-
   else {
     window.global_this_obj.setState({isStateChangeFromBroadcastData : true});
     const player = window.yt_player;

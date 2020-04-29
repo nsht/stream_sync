@@ -27,7 +27,8 @@ class Party extends React.Component {
     chat_log: [],
     invite_popup_shown: false,
     connected_users: {},
-    color_code: ""
+    color_code: "",
+    isStateChangeFromBroadcastData: false
   };
 
   constructor(props) {
@@ -170,7 +171,7 @@ class Party extends React.Component {
           className={
             "modal " +
             (this.state.invite_popup_shown === false &&
-            this.state.is_host === true
+              this.state.is_host === true
               ? "is-active"
               : "")
           }
@@ -219,6 +220,7 @@ class Party extends React.Component {
                   youtube_video_id={this.state.youtube_video_id}
                   youtube_current_pos={this.state.youtube_current_pos}
                   is_host={this.state.is_host}
+                  isStateChangeFromBroadcastData={this.state.isStateChangeFromBroadcastData}
                 ></Player>
                 <UserList
                   connected_users={this.state.connected_users}

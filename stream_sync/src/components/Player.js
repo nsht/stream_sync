@@ -6,8 +6,7 @@ class Player extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      player: "",
-      isStateChangeFromBroadcastData: false
+      player: ""
     };
   }
   componentDidUpdate() {
@@ -53,16 +52,16 @@ class Player extends React.Component {
     event.target.playVideo();
   };
   onPlayerStateChange = event => {
-    console.log(event);
-
-    if (!this.state.isStateChangeFromBroadcastData) {
+    console.log("----------------------------------------------------------")
+    console.log(this.props.isStateChangeFromBroadcastData)
+    if (!this.props.isStateChangeFromBroadcastData) {
       if (event.data == window.YT.PlayerState.PLAYING || event.data == window.YT.PlayerState.PAUSED || event.data == window.YT.PlayerState.BUFFERING) {
         sync_video();
       }
-      
     }
-    if (event.data != window.YT.PlayerState.BUFFERING && this.state.isStateChangeFromBroadcastData) {
-      this.setState({isStateChangeFromBroadcastData : false});
+    if (event.data != window.YT.PlayerState.BUFFERING && this.props.isStateChangeFromBroadcastData) {
+      console.log("set false")
+      window.global_this_obj.setState({ isStateChangeFromBroadcastData: false });
     }
 
   };
