@@ -62,22 +62,29 @@ export function createConnection(
 
 function handle_connection(conn) {
   window.peer_ids.push(conn.peer);
+
   conn.on("data", function(data) {
     console.log("data received");
     console.log(data);
     data_handler(data);
   });
   console.log("Handled connection");
+
   conn.on("close", function() {
-    conn = null;
+    var connected_users = window.global_this_obj.state.connected_users;
+    const left_user_name = connected_users[conn.peer].user_name;
+    delete connected_users[conn.peer];
+    window.global_this_obj.setState({ connected_users: connected_users });
+    window.global_this_obj.notify(`${left_user_name} has left the party`);
+    update_data(window.peer_obj.id, "connected_users", connected_users);
+
   });
 
   window.connections.push(conn);
 
   if (window.is_host === true) {
     setTimeout(function() {
-      var msg_data = fetch_current_video_status();
-      send_data(msg_data);
+      sync_video();
       var msg_user_list = {
         data_type: "user_list",
         user_list: window.global_this_obj.state.connected_users
@@ -87,9 +94,8 @@ function handle_connection(conn) {
     broadcast_new_connection(conn.peer);
   }
 }
+
 function data_handler(data) {
-  console.log("Data received: ");
-  console.log(data);
   if (typeof data === "object" && data !== null) {
     if (data.data_type === "chat") {
       chat_handler(data);
@@ -176,17 +182,49 @@ function handle_youtube(data) {
       youtube_video_id: data.videoId,
       youtube_current_pos: Math.ceil(data.startSeconds)
     });
+  } else {
+    window.global_this_obj.setState({ isStateChangeFromBroadcastData: true });
+    const player = window.yt_player;
+
+    if (data.event == 2) {
+      // isStateChangeFromBroadcastData = true;
+      player.seekTo(data.startSeconds, true);
+      player.pauseVideo();
+    } else if (data.event == 1) {
+      // isStateChangeFromBroadcastData = true;
+      player.seekTo(Math.ceil(data.startSeconds), true);
+      player.playVideo();
+    } else if (data.event == 3) {
+      // isStateChangeFromBroadcastData = true;
+      player.seekTo(data.startSeconds, true);
+      player.pauseVideo();
+    } else if (data.event == "playbackRateChange") {
+      player.seekTo(data.startSeconds, true);
+      player.setPlaybackRate(data.playbackRate);
+    }
+    setTimeout(function() {
+      window.global_this_obj.setState({
+        isStateChangeFromBroadcastData: false
+      });
+    }, 500);
   }
+}
+
+export function sync_video(event = null) {
+  var payload_data = fetch_current_video_status(event);
+  send_data(payload_data);
 }
 
 function fetch_current_video_status(event) {
   var yt_event;
   const player = window.yt_player;
+
   if (event != null) {
     yt_event = event;
   } else {
     yt_event = player.getPlayerState();
   }
+
   var videoId = player.getVideoData()["video_id"];
   var startSeconds = player.getCurrentTime();
   var playbackRate = player.getPlaybackRate();

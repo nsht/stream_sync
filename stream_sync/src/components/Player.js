@@ -1,4 +1,5 @@
 import React from "react";
+import { sync_video } from "../utils/webRTC_utils";
 
 class Player extends React.Component {
   constructor(props) {
@@ -51,10 +52,23 @@ class Player extends React.Component {
     event.target.playVideo();
   };
   onPlayerStateChange = event => {
+    console.log("----------------------------------------------------------");
+    console.log(this.props.isStateChangeFromBroadcastData);
     console.log(event);
+    if (!this.props.isStateChangeFromBroadcastData) {
+      if (
+        event.data == window.YT.PlayerState.PLAYING ||
+        event.data == window.YT.PlayerState.PAUSED
+      ) {
+        sync_video();
+      }
+    }
   };
-  onPlaybackRateChange = event => {
+  onPlayerPlaybackRateChange = event => {
     console.log(event);
+    if (this.props.is_host) {
+      sync_video("playbackRateChange");
+    }
   };
   render() {
     // if (!this.props.youtube_video_id) {

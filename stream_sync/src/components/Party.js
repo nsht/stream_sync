@@ -27,7 +27,8 @@ class Party extends React.Component {
     chat_log: [],
     invite_popup_shown: false,
     connected_users: {},
-    color_code: ""
+    color_code: "",
+    isStateChangeFromBroadcastData: false
   };
 
   constructor(props) {
@@ -108,7 +109,7 @@ class Party extends React.Component {
   notify = message => {
     toast.info(message, {
       position: "bottom-left",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -123,12 +124,12 @@ class Party extends React.Component {
         <Navbar></Navbar>
         <ToastContainer
           position="bottom-left"
-          autoClose={5000}
+          autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
           rtl={false}
-          pauseOnFocusLoss
+          pauseOnFocusLoss={false}
           draggable
           pauseOnHover
         />
@@ -218,6 +219,10 @@ class Party extends React.Component {
                 <Player
                   youtube_video_id={this.state.youtube_video_id}
                   youtube_current_pos={this.state.youtube_current_pos}
+                  is_host={this.state.is_host}
+                  isStateChangeFromBroadcastData={
+                    this.state.isStateChangeFromBroadcastData
+                  }
                 ></Player>
                 <UserList
                   connected_users={this.state.connected_users}
