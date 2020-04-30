@@ -129,7 +129,7 @@ class Party extends React.Component {
           newestOnTop={false}
           closeOnClick
           rtl={false}
-          pauseOnFocusLoss
+          pauseOnFocusLoss={false}
           draggable
           pauseOnHover
         />
@@ -171,7 +171,7 @@ class Party extends React.Component {
           className={
             "modal " +
             (this.state.invite_popup_shown === false &&
-              this.state.is_host === true
+            this.state.is_host === true
               ? "is-active"
               : "")
           }
@@ -220,7 +220,9 @@ class Party extends React.Component {
                   youtube_video_id={this.state.youtube_video_id}
                   youtube_current_pos={this.state.youtube_current_pos}
                   is_host={this.state.is_host}
-                  isStateChangeFromBroadcastData={this.state.isStateChangeFromBroadcastData}
+                  isStateChangeFromBroadcastData={
+                    this.state.isStateChangeFromBroadcastData
+                  }
                 ></Player>
                 <UserList
                   connected_users={this.state.connected_users}
