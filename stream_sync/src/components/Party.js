@@ -109,7 +109,7 @@ class Party extends React.Component {
   notify = message => {
     toast.info(message, {
       position: "bottom-left",
-      autoClose: 5000,
+      autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -124,7 +124,7 @@ class Party extends React.Component {
         <Navbar></Navbar>
         <ToastContainer
           position="bottom-left"
-          autoClose={5000}
+          autoClose={3000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
