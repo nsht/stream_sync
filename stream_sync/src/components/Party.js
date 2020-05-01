@@ -228,7 +228,7 @@ class Party extends React.Component {
                   connected_users={this.state.connected_users}
                 ></UserList>
               </div>
-              <div className="tile">
+              <div className="">
                 <Chat
                   user_name={this.state.user_name}
                   chat_log={this.state.chat_log}
