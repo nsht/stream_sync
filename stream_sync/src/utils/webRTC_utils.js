@@ -77,7 +77,6 @@ function handle_connection(conn) {
     window.global_this_obj.setState({ connected_users: connected_users });
     window.global_this_obj.notify(`${left_user_name} has left the party`);
     update_data(window.peer_obj.id, "connected_users", connected_users);
-
   });
 
   window.connections.push(conn);
@@ -107,6 +106,8 @@ function data_handler(data) {
       handle_intro(data);
     } else if (data.data_type === "user_list") {
       handle_intro_init(data);
+    } else if (data.data_type === "change_video") {
+      change_video(data.video_id);
     }
   }
 }
@@ -273,4 +274,27 @@ export function introduce(user_name, color_code) {
     time_stamp: Date.now()
   };
   send_data(format);
+}
+
+export function change_video(video_id, broadcast = false) {
+  var player = window.yt_player;
+  player.loadVideoById(video_id);
+  if (broadcast) {
+    var format = {
+      data_type: "change_video",
+      video_id: video_id
+    };
+    send_data(format);
+    // broadcast it to everyone
+  }
+}
+
+export function parseIdFromURL(url) {
+  var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  var match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    return match[2];
+  } else {
+    return false;
+  }
 }
