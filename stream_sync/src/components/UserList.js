@@ -1,5 +1,5 @@
 import React from "react";
-
+import ChangeVideo from "./ChangeVideo";
 class UserList extends React.Component {
   render() {
     var connected_users = this.props.connected_users;
@@ -25,6 +25,7 @@ class UserList extends React.Component {
       <div className="box info_box">
         <h4>Connected Users</h4>
         <div className="avatar_container">{avatars}</div>
+        <ChangeVideo></ChangeVideo>
       </div>
     );
   }
