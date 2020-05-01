@@ -99,7 +99,7 @@ code {
 }
 
 .chat_box {
-  height: 65vh;
+  height: 66vh;
   overflow-y: auto;
 }
 
@@ -140,5 +140,10 @@ code {
 }
 
 .info_box {
-  margin: 3%;
+  margin-top: 2%;
+  margin-right: 2%;
+}
+
+.changeVideo_divider {
+  margin: 0.8rem 0;
 }
