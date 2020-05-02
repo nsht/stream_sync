@@ -4,10 +4,12 @@ import App from "./App";
 import Host from "./Host";
 import Party from "./Party";
 import Join from "./Join";
+import HomePage from "./HomePage";
 const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />
+      <Route exact path="/h" component={HomePage} />
       <Route exact path="/host" component={Host} />
       <Route exact path="/join" component={Join} />
       <Route exact path="/party" component={Host} />
