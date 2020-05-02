@@ -76,6 +76,7 @@ function handle_connection(conn) {
     delete connected_users[conn.peer];
     window.global_this_obj.setState({ connected_users: connected_users });
     window.global_this_obj.notify(`${left_user_name} has left the party`);
+    // TODO only do this if host, 
     update_data(window.peer_obj.id, "connected_users", connected_users);
   });
 
