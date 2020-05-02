@@ -76,8 +76,9 @@ function handle_connection(conn) {
     delete connected_users[conn.peer];
     window.global_this_obj.setState({ connected_users: connected_users });
     window.global_this_obj.notify(`${left_user_name} has left the party`);
-    // TODO only do this if host, 
-    update_data(window.peer_obj.id, "connected_users", connected_users);
+    if (window.is_host) {
+      update_data(window.peer_obj.id, "connected_users", connected_users);
+    }
   });
 
   window.connections.push(conn);
@@ -259,7 +260,9 @@ function handle_intro(data) {
   };
   window.global_this_obj.setState({ connected_users: connected_users });
   window.global_this_obj.notify(`${data.user_name} has joined the party`);
-  update_data(window.peer_obj.id, "connected_users", connected_users);
+  if (window.is_host) {
+    update_data(window.peer_obj.id, "connected_users", connected_users);
+  }
 }
 
 function handle_intro_init(data) {
