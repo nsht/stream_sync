@@ -6,16 +6,17 @@ class HomePage extends React.Component {
     return (
       <>
         <Navbar></Navbar>
-        <section class="hero is-link is-primary is-fullheight-with-navbar">
-          <div class="hero-body">
-            <div class="tile is-ancestor">
-              <div class="tile is-6">
-                <div className="container">
-                  <h1 class="title">Watch YouTube Together with friends!</h1>
-                  <h2 class="subtitle">Watch your favourite videos in sync</h2>
+        <section className="hero is-link is-primary has-background-primary is-fullheight-with-navbar">
+          <div className="hero-body">
+            <div className="tile is-ancestor">
+              <div className="tile is-6">
+                <div className="container homepage_left_hero">
+                  <h1 className="title has-text-centered">
+                    Watch YouTube Together with friends!
+                  </h1>
                 </div>
               </div>
-              <div class="tile is-6">
+              <div className="tile is-6">
                 <video
                   src={process.env.PUBLIC_URL + "/intro_video.webm"}
                 ></video>
@@ -23,6 +24,22 @@ class HomePage extends React.Component {
             </div>
           </div>
         </section>
+        <div className="row">
+          <a className="select_column host" href="/host">
+            Host
+          </a>
+          <a className="select_column join" href="/join">
+            Join
+          </a>
+        </div>
+        <footer className="footer">
+          <div className="content has-text-centered">
+            <p>
+              <strong>Stream Sync</strong> by{" "}
+              <a href="https://jgthms.com">Stream Sync Inc.</a>
+            </p>
+          </div>
+        </footer>
       </>
     );
   }

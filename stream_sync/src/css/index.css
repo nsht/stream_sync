@@ -42,6 +42,8 @@ code {
   justify-content: center;
   font-size: 3em;
   transition: width 0.5s;
+  border: 2px solid black;
+
 }
 .select_column:hover {
   width: 100%;
@@ -146,4 +148,15 @@ code {
 
 .changeVideo_divider {
   margin: 0.8rem 0;
+}
+
+.homepage_left_hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage_left_hero h1 {
+  font-size: 3em;
 }
