@@ -27,6 +27,7 @@ class HomePage extends React.Component {
             </div>
           </div>
         </section>
+        {/* TODO refactor for responsiveness with section and hero tags */}
         <div className="row">
           <div className="homepage_explainer" href="/join">
             <img
