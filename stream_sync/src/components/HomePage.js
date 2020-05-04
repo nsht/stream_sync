@@ -18,12 +18,39 @@ class HomePage extends React.Component {
               </div>
               <div className="tile is-6">
                 <video
+                  className="hero_video"
+                  autoplay="true"
+                  loop="true"
                   src={process.env.PUBLIC_URL + "/intro_video.webm"}
                 ></video>
               </div>
             </div>
           </div>
         </section>
+        <div className="row">
+          <div className="homepage_explainer" href="/join">
+            <img
+              className="laptop_svg"
+              src={process.env.PUBLIC_URL + "/laptop.svg"}
+            ></img>
+            <img
+              className="sync_svg"
+              src={process.env.PUBLIC_URL + "/sync.svg"}
+            ></img>
+            <img
+              className="laptop_svg"
+              src={process.env.PUBLIC_URL + "/laptop.svg"}
+            ></img>
+          </div>
+
+          <div className="homepage_explainer " href="/host">
+            <ol>
+              <li>Host a party using a YouTube link</li>
+              <li>Share links with friends</li>
+              <li>Watch in sync! Chat with friends!</li>
+            </ol>
+          </div>
+        </div>
         <div className="row">
           <a className="select_column host" href="/host">
             Host

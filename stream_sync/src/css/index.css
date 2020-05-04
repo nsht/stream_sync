@@ -43,8 +43,8 @@ code {
   font-size: 3em;
   transition: width 0.5s;
   border: 2px solid black;
-
 }
+
 .select_column:hover {
   width: 100%;
 }
@@ -159,4 +159,44 @@ code {
 
 .homepage_left_hero h1 {
   font-size: 3em;
+}
+
+.homepage_explainer {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  transition: width 0.5s;
+  border: 2px solid black;
+}
+
+.laptop_svg {
+  height: 100px;
+  margin: 5px;
+}
+
+.sync_svg {
+  height: 100px;
+
+  animation-name: ckw;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform-origin: 50% 50%;
+  display: inline-block;
+}
+@keyframes ckw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.hero_video {
+  border: 2px solid black;
+  border-radius: 5px;
 }
