@@ -189,19 +189,19 @@ function handle_youtube(data) {
     window.global_this_obj.setState({ isStateChangeFromBroadcastData: true });
     const player = window.yt_player;
 
-    if (data.event == 2) {
+    if (data.event === 2) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(data.startSeconds, true);
       player.pauseVideo();
-    } else if (data.event == 1) {
+    } else if (data.event === 1) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(Math.ceil(data.startSeconds), true);
       player.playVideo();
-    } else if (data.event == 3) {
+    } else if (data.event === 3) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(data.startSeconds, true);
       player.pauseVideo();
-    } else if (data.event == "playbackRateChange") {
+    } else if (data.event === "playbackRateChange") {
       player.seekTo(data.startSeconds, true);
       player.setPlaybackRate(data.playbackRate);
     }

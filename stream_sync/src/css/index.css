@@ -202,12 +202,65 @@ code {
 
 .full_height {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 1fr);
-  align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
 }
 
 .full_height .tile {
   justify-content: center;
+}
+
+.test_row {
+  min-height: 100vh;
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, 1fr); */
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+}
+
+.test_row .content {
+  border: solid 2px black;
+  margin: 0px !important;
+  padding: 0px 40px 40px 0px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.expliner_img {
+  display: block;
+  width: 100%;
+  box-shadow: rgba(84, 70, 35, 0.15) 0px 2px 8px,
+    rgba(84, 70, 35, 0.15) 0px 1px 3px;
+  border-radius: 4px;
+  margin-bottom: 18px;
+  width: 450px;
+  height: 200px;
+}
+
+.floating {
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+  height: 100px;
+  margin: 5px;
+}
+
+@keyframes floating {
+  from {
+    transform: translate(0, 0px);
+  }
+  65% {
+    transform: translate(0, 15px);
+  }
+  to {
+    transform: translate(0, -0px);
+  }
 }
