@@ -162,14 +162,13 @@ code {
 }
 
 .homepage_explainer {
-  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5em;
-  transition: width 0.5s;
-  border: 2px solid black;
+  /* transition: width 0.5s; */
+  /* border: 2px solid black; */
 }
 
 .laptop_svg {
@@ -199,4 +198,16 @@ code {
 .hero_video {
   border: 2px solid black;
   border-radius: 5px;
+}
+
+.full_height {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 1fr);
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+}
+
+.full_height .tile {
+  justify-content: center;
 }
