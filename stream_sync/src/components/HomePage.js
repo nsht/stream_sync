@@ -32,14 +32,14 @@ class HomePage extends React.Component {
           <div className="content">
             <img
               className="floating"
-              src={process.env.PUBLIC_URL + "/party.svg"}
+              src={process.env.PUBLIC_URL + "/party_color.svg"}
             ></img>
             <h4>Create a Party</h4>
           </div>
           <div className="content">
             <img
               className="floating"
-              src={process.env.PUBLIC_URL + "/copy.svg"}
+              src={process.env.PUBLIC_URL + "/copy_color.svg"}
             ></img>
             <h4>Share the link with friends</h4>
           </div>
@@ -47,15 +47,15 @@ class HomePage extends React.Component {
             <div>
               <img
                 className="laptop_svg"
-                src={process.env.PUBLIC_URL + "/laptop.svg"}
+                src={process.env.PUBLIC_URL + "/laptop_color.svg"}
               ></img>
               <img
                 className="sync_svg"
-                src={process.env.PUBLIC_URL + "/sync.svg"}
+                src={process.env.PUBLIC_URL + "/sync_color.svg"}
               ></img>
               <img
                 className="laptop_svg"
-                src={process.env.PUBLIC_URL + "/laptop.svg"}
+                src={process.env.PUBLIC_URL + "/laptop_color.svg"}
               ></img>
             </div>
             <h4>Play/Pause/Seek the video in Sync</h4>
@@ -63,7 +63,7 @@ class HomePage extends React.Component {
           <div className="content">
             <img
               className="floating"
-              src={process.env.PUBLIC_URL + "/chat.svg"}
+              src={process.env.PUBLIC_URL + "/chat_color.svg"}
             ></img>
             <h4>Chat!</h4>
           </div>
