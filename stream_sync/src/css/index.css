@@ -213,7 +213,6 @@ code {
   display: grid;
   /* grid-template-columns: repeat(auto-fit, 1fr); */
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
   grid-auto-rows: 1fr;
   align-items: stretch;
 }
@@ -262,5 +261,13 @@ code {
   }
   to {
     transform: translate(0, -0px);
+  }
+}
+
+
+@media all and (min-width: 700px) {
+  .test_row{
+    grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+
   }
 }
