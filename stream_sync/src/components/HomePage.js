@@ -19,7 +19,7 @@ class HomePage extends React.Component {
               <div className="tile is-6">
                 <video
                   className="hero_video"
-                  autoplay="true"
+                  autoPlay="true"
                   loop="true"
                   src={process.env.PUBLIC_URL + "/intro_video.webm"}
                 ></video>
