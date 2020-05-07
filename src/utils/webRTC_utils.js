@@ -11,8 +11,8 @@ export function createConnection(
   const Peer = window.Peer;
   const settings = {
     debug: 2,
-    host: "116.203.130.35",
-    port: 9000,
+    host: "peerjs.nishit.xyz",
+    port: 80,
     path: "/myapp",
     iceTransportPolicy: "relay",
 
