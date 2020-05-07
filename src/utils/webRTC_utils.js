@@ -12,7 +12,7 @@ export function createConnection(
   const settings = {
     debug: 2,
     host: "peerjs.nishit.xyz",
-    port: 80,
+    port:"",
     path: "/myapp",
     iceTransportPolicy: "relay",
 
