@@ -1,3 +1,4 @@
 node_modules/*
 Peer-to-Peer-Cue-System-master/*
 .idea/*
+stream_sync/package-lock.json
