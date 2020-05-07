@@ -267,7 +267,11 @@ code {
 
 @media all and (min-width: 700px) {
   .test_row{
-    grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+    grid-template-columns: 1fr 1fr;
 
   }
+}
+
+.content h4{
+  margin-top: 0.8em;
 }
