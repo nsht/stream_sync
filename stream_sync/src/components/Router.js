@@ -8,7 +8,7 @@ import HomePage from "./HomePage";
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={App} />
+      <Route exact path="/" component={HomePage} />
       <Route exact path="/h" component={HomePage} />
       <Route exact path="/host" component={Host} />
       <Route exact path="/join" component={Join} />
