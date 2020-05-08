@@ -143,7 +143,7 @@ export function bulk_connect(peer_ids) {
   for (let id in peer_ids) {
     setTimeout(function() {
       connect_to_peer(peer_ids[id]);
-    }, 500);
+    }, 1000);
   }
 }
 // Chat utils
