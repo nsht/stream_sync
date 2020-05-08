@@ -92,7 +92,7 @@ function handle_connection(conn) {
         only_host_controls: window.global_this_obj.state.only_host_controls
       };
       send_data(msg_user_list);
-    }, 1500);
+    }, 3000);
     broadcast_new_connection(conn.peer);
   }
 }
@@ -143,7 +143,7 @@ export function bulk_connect(peer_ids) {
   for (let id in peer_ids) {
     setTimeout(function() {
       connect_to_peer(peer_ids[id]);
-    }, 1000);
+    }, 500);
   }
 }
 // Chat utils
