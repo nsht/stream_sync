@@ -14,8 +14,7 @@ export function createConnection(
     host: "peerjs.nishit.xyz",
     port: "",
     path: "/myapp",
-    iceTransportPolicy: "relay",
-
+    // iceTransportPolicy: "relay",
     config: {
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" },
