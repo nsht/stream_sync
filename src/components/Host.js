@@ -16,11 +16,12 @@ class Host extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     var video_id = this.parseIdFromURL(e.target.youtubeLink.value);
-
+    console.log(e.target.onlyHost.checked);
     this.setState({
       user_name: e.target.userName.value,
       room_name: e.target.roomName.value,
       youtube_video_id: video_id,
+      only_host_controls: e.target.onlyHost.checked,
       submitted: true
     });
     createConnection(this, true);
@@ -100,6 +101,17 @@ class Host extends React.Component {
                             required
                           ></input>
                         </div>
+                      </div>
+
+                      <div className="field">
+                        <label class="checkbox">
+                          <input
+                            type="checkbox"
+                            name="onlyHost"
+                            ref={this.onlyHostRef}
+                          />
+                          Only allow host to control video
+                        </label>
                       </div>
                       <div className="buttons is-right">
                         <button

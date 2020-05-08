@@ -12,15 +12,15 @@ export function createConnection(
   const settings = {
     debug: 2,
     host: "peerjs.nishit.xyz",
-    port:"",
+    port: "",
     path: "/myapp",
     iceTransportPolicy: "relay",
 
     config: {
       iceServers: [
-        { url: "stun:stun.l.google.com:19302" },
+        { urls: "stun:stun.l.google.com:19302" },
         {
-          url: "turn:51.15.213.116:3478",
+          urls: "turn:51.15.213.116:3478",
           username: "nishit",
           credential: "test123"
         }
@@ -88,7 +88,8 @@ function handle_connection(conn) {
       sync_video();
       var msg_user_list = {
         data_type: "user_list",
-        user_list: window.global_this_obj.state.connected_users
+        user_list: window.global_this_obj.state.connected_users,
+        only_host_controls: window.global_this_obj.state.only_host_controls
       };
       send_data(msg_user_list);
     }, 1500);
@@ -214,6 +215,12 @@ function handle_youtube(data) {
 }
 
 export function sync_video(event = null) {
+  if (
+    window.global_this_obj.state.only_host_controls == true &&
+    window.is_host != true
+  ) {
+    return;
+  }
   var payload_data = fetch_current_video_status(event);
   send_data(payload_data);
 }
@@ -221,7 +228,6 @@ export function sync_video(event = null) {
 function fetch_current_video_status(event) {
   var yt_event;
   const player = window.yt_player;
-
   if (event != null) {
     yt_event = event;
   } else {
@@ -266,7 +272,10 @@ function handle_intro(data) {
 }
 
 function handle_intro_init(data) {
-  window.global_this_obj.setState({ connected_users: data.user_list });
+  window.global_this_obj.setState({
+    connected_users: data.user_list,
+    only_host_controls: data.only_host_controls
+  });
 }
 
 export function introduce(user_name, color_code) {

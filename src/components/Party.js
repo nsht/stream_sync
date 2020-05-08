@@ -68,6 +68,7 @@ class Party extends React.Component {
         user_name: data.user_name,
         youtube_video_id: data.youtube_video_id,
         room_name: data.room_name,
+        only_host_controls: data.only_host_controls,
         is_host: data.is_host,
         connected_users: connected_users,
         color_code: color_code
@@ -226,6 +227,8 @@ class Party extends React.Component {
                 ></Player>
                 <UserList
                   connected_users={this.state.connected_users}
+                  only_host_controls={this.state.only_host_controls}
+                  is_host={this.state.is_host}
                 ></UserList>
               </div>
               <div className="">
