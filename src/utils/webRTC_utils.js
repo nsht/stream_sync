@@ -83,15 +83,15 @@ function handle_connection(conn) {
   window.connections.push(conn);
 
   if (window.is_host === true) {
-    setTimeout(function() {
-      sync_video();
-      var msg_user_list = {
-        data_type: "user_list",
-        user_list: window.global_this_obj.state.connected_users,
-        only_host_controls: window.global_this_obj.state.only_host_controls
-      };
-      send_data(msg_user_list);
-    }, 3000);
+    // setTimeout(function() {
+    //   sync_video();
+    //   var msg_user_list = {
+    //     data_type: "user_list",
+    //     user_list: window.global_this_obj.state.connected_users,
+    //     only_host_controls: window.global_this_obj.state.only_host_controls
+    //   };
+    //   send_data(msg_user_list);
+    // }, 3000);
     broadcast_new_connection(conn.peer);
   }
 }
@@ -267,6 +267,15 @@ function handle_intro(data) {
   window.global_this_obj.notify(`${data.user_name} has joined the party`);
   if (window.is_host) {
     update_data(window.peer_obj.id, "connected_users", connected_users);
+    setTimeout(function() {
+      sync_video();
+      var msg_user_list = {
+        data_type: "user_list",
+        user_list: window.global_this_obj.state.connected_users,
+        only_host_controls: window.global_this_obj.state.only_host_controls
+      };
+      send_data(msg_user_list);
+    }, 250);
   }
 }
 
