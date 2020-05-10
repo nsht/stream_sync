@@ -60,7 +60,10 @@ class Party extends React.Component {
         var reconnect_users = JSON.parse(JSON.stringify(connected_users));
 
         delete reconnect_users[this.props.match.params.host_id];
-        bulk_connect(Object.keys(reconnect_users));
+        bulk_connect(
+          Object.keys(reconnect_users),
+          connected_users[this.props.match.params.host_id]
+        );
       }
 
       this.setState({

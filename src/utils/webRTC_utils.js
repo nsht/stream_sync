@@ -71,6 +71,9 @@ function handle_connection(conn) {
 
   conn.on("close", function() {
     var connected_users = window.global_this_obj.state.connected_users;
+    if (!connected_users || !connected_users[conn.peer]) {
+      return;
+    }
     const left_user_name = connected_users[conn.peer].user_name;
     delete connected_users[conn.peer];
     window.global_this_obj.setState({ connected_users: connected_users });
@@ -138,12 +141,17 @@ function connect_to_peer(peer_id) {
   handle_connection(conn);
 }
 
-export function bulk_connect(peer_ids) {
+export function bulk_connect(peer_ids, host_data) {
   for (let id in peer_ids) {
     setTimeout(function() {
       connect_to_peer(peer_ids[id]);
-    }, 500);
+    }, 250);
   }
+  const wait_time = 250 * peer_ids.length + 100;
+  setTimeout(function() {
+    console.log("intro called");
+    introduce(host_data.user_name, host_data.color_code);
+  }, wait_time);
 }
 // Chat utils
 function chat_handler(chat_data) {
