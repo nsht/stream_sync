@@ -201,17 +201,23 @@ function handle_youtube(data) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(data.startSeconds, true);
       player.pauseVideo();
+      window.global_this_obj.notify(`${data.user_name} paused the video`);
     } else if (data.event === 1) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(Math.ceil(data.startSeconds), true);
       player.playVideo();
+      window.global_this_obj.notify(`${data.user_name} started the video`);
     } else if (data.event === 3) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(data.startSeconds, true);
       player.pauseVideo();
+      window.global_this_obj.notify(`${data.user_name} is buffering`);
+
     } else if (data.event === "playbackRateChange") {
       player.seekTo(data.startSeconds, true);
       player.setPlaybackRate(data.playbackRate);
+      window.global_this_obj.notify(`${data.user_name} changed the playback rate to ${data.playbackRate}x`);
+
     }
     setTimeout(function() {
       window.global_this_obj.setState({
@@ -247,6 +253,7 @@ function fetch_current_video_status(event) {
 
   var payload = {
     data_type: "youtube",
+    user_name: window.global_this_obj.state.user_name,
     event: yt_event,
     videoId: videoId,
     startSeconds: startSeconds,
