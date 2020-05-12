@@ -110,10 +110,10 @@ class Party extends React.Component {
     this.setState({ invite_popup_shown: true });
   };
 
-  notify = message => {
+  notify = (message,timeout=3000) => {
     toast.info(message, {
       position: "bottom-left",
-      autoClose: 3000,
+      autoClose: timeout,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

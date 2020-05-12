@@ -42,6 +42,7 @@ export function createConnection(
 
   peer.on("open", function(id) {
     console.log("MY peer ID is " + peer.id);
+    window.peer_id = peer.id;
     thisObj.setState({
       peer_id: peer.id
     });
@@ -57,6 +58,49 @@ export function createConnection(
     console.log("connection called");
     handle_connection(conn);
   });
+
+  peer.on("close", function() {
+    console.log("peer closed");
+    window.global_this_obj.notify("Network disconnected please refresh", 10000);
+  });
+
+  peer.on("disconnected", function() {
+    console.log("peer disconnected");
+    // peer.reconnect();
+    window.global_this_obj.notify("Network disconnected please refresh", 10000);
+  });
+
+  // peer.on("error", function(err) {
+  // window.global_this_obj.notify("Network disconnected please refresh",10000);
+
+  //   console.log(`peerjs error ${err}`);
+  //   var x = 0;
+  //   var intervalID = setInterval(function() {
+  //     if (is_online()) {
+  //       createConnection(
+  //         window.global_this_obj,
+  //         window.is_host,
+  //         window.global_this_obj.props.match.params.host_id,
+  //         window.peer_id
+  //       );
+  //       window.clearInterval(intervalID);
+  //     }
+
+  //     if (++x === 10) {
+  //       window.clearInterval(intervalID);
+  //     }
+  //   }, 1000);
+  // });
+}
+
+function is_online() {
+  fetch("https://corona-api.nishit.xyz/country/in")
+    .then(response => {
+      return true;
+    })
+    .catch(error => {
+      return false;
+    });
 }
 
 function handle_connection(conn) {
@@ -212,12 +256,12 @@ function handle_youtube(data) {
       player.seekTo(data.startSeconds, true);
       player.pauseVideo();
       window.global_this_obj.notify(`${data.user_name} is buffering`);
-
     } else if (data.event === "playbackRateChange") {
       player.seekTo(data.startSeconds, true);
       player.setPlaybackRate(data.playbackRate);
-      window.global_this_obj.notify(`${data.user_name} changed the playback rate to ${data.playbackRate}x`);
-
+      window.global_this_obj.notify(
+        `${data.user_name} changed the playback rate to ${data.playbackRate}x`
+      );
     }
     setTimeout(function() {
       window.global_this_obj.setState({
