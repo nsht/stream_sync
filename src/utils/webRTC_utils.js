@@ -273,8 +273,8 @@ function handle_youtube(data) {
 
 export function sync_video(event = null) {
   if (
-    window.global_this_obj.state.only_host_controls == true &&
-    window.is_host != true
+    window.global_this_obj.state.only_host_controls === true &&
+    window.is_host !== true
   ) {
     return;
   }
@@ -285,7 +285,7 @@ export function sync_video(event = null) {
 function fetch_current_video_status(event) {
   var yt_event;
   const player = window.yt_player;
-  if (event != null) {
+  if (event !== null) {
     yt_event = event;
   } else {
     yt_event = player.getPlayerState();

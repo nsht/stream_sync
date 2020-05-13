@@ -17,12 +17,7 @@ class Navbar extends React.Component {
               height="28"
               alt="Logo"
             ></img>
-          </div>
-        </div>
-
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-            <div className="navbar-item">Home</div>
+            Youtube Party
           </div>
         </div>
 

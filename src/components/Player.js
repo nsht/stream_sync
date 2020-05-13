@@ -52,13 +52,10 @@ class Player extends React.Component {
     event.target.playVideo();
   };
   onPlayerStateChange = event => {
-    console.log("----------------------------------------------------------");
-    console.log(this.props.isStateChangeFromBroadcastData);
-    console.log(event);
     if (!this.props.isStateChangeFromBroadcastData) {
       if (
-        event.data == window.YT.PlayerState.PLAYING ||
-        event.data == window.YT.PlayerState.PAUSED
+        event.data === window.YT.PlayerState.PLAYING ||
+        event.data === window.YT.PlayerState.PAUSED
       ) {
         sync_video();
       }
