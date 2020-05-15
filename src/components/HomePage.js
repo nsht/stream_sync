@@ -29,21 +29,21 @@ class HomePage extends React.Component {
         </section>
         {/* TODO refactor for responsiveness with section and hero tags */}
         <div className="test_row">
-          <div className="content">
+          <div className="content_party">
             <img
               className="floating"
               src={process.env.PUBLIC_URL + "/party_color.svg"}
             ></img>
             <h4>Create a Party</h4>
           </div>
-          <div className="content">
+          <div className="content_copy">
             <img
               className="floating"
               src={process.env.PUBLIC_URL + "/copy_color.svg"}
             ></img>
             <h4>Share the link with friends</h4>
           </div>
-          <div className="content">
+          <div className="content_sync">
             <div>
               <img
                 className="laptop_svg"
@@ -60,7 +60,7 @@ class HomePage extends React.Component {
             </div>
             <h4>Play/Pause/Seek the video in Sync</h4>
           </div>
-          <div className="content">
+          <div className="content_chat">
             <img
               className="floating"
               src={process.env.PUBLIC_URL + "/chat_color.svg"}
@@ -76,14 +76,14 @@ class HomePage extends React.Component {
             Join
           </a>
         </div>
-        <footer className="footer">
+        {/* <footer className="footer">
           <div className="content has-text-centered">
             <p>
               <strong>Stream Sync</strong> by{" "}
               <a href="https://jgthms.com">Stream Sync Inc.</a>
             </p>
           </div>
-        </footer>
+        </footer> */}
       </>
     );
   }

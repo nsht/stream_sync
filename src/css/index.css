@@ -42,7 +42,7 @@ code {
   justify-content: center;
   font-size: 3em;
   transition: width 0.5s;
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 
 .select_column:hover {
@@ -63,12 +63,12 @@ code {
 
 .host {
   background: antiquewhite;
-  border-right: 2px solid black;
+  border-right: 1px solid black;
 }
 
 .join {
   background: aquamarine;
-  border-left: 2px solid black;
+  border-left: 1px solid black;
 }
 
 .emoji-mart {
@@ -217,12 +217,47 @@ code {
   align-items: stretch;
 }
 
-.test_row .content {
-  border: solid 2px black;
+.test_row .content_party {
   margin: 0px !important;
   padding: 0px 40px 40px 0px;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  border-top: 1px solid transparent;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.test_row .content_copy {
+  margin: 0px !important;
+  padding: 0px 40px 40px 0px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.test_row .content_sync {
+  margin: 0px !important;
+  padding: 0px 40px 40px 0px;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.test_row .content_chat {
+  margin: 0px !important;
+  padding: 0px 40px 40px 0px;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -272,6 +307,29 @@ code {
   }
 }
 
-.content h4{
+.test_row h4{
   margin-top: 0.8em;
 }
+
+/* Scrollbar - start */
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+/* Scrollbar - end */
