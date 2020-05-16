@@ -8,24 +8,30 @@ export function createConnection(
   host_id = null,
   previous_id = null
 ) {
+  let peer_js_url = process.env.REACT_APP_PEERJS;
+  let turn_url = process.env.REACT_APP_TURN;
+  let turn_username = process.env.REACT_APP_TURN_USERNAME;
+  let turn_credentials = process.env.REACT_APP_TURN_CREDENTIALS;
   const Peer = window.Peer;
   const settings = {
     debug: 2,
-    host: "peerjs.nishit.xyz",
-    port: "",
-    path: "/myapp",
     // iceTransportPolicy: "relay",
     config: {
-      iceServers: [
-        { urls: "stun:stun.l.google.com:19302" },
-        {
-          urls: "turn:51.15.213.116:3478",
-          username: "nishit",
-          credential: "test123"
-        }
-      ]
+      iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
     }
   };
+  if (peer_js_url) {
+    settings.host = peer_js_url;
+    settings.port = "";
+    settings.path = "/myapp";
+  }
+  if (turn_url) {
+    settings.config.iceServers.push({
+      urls: turn_url,
+      username: turn_username,
+      credential: turn_credentials
+    });
+  }
 
   if (previous_id) {
     var peer = new Peer(previous_id, settings);
