@@ -19,7 +19,6 @@ import "react-toastify/dist/ReactToastify.min.css";
 class Party extends React.Component {
   state = {
     user_name: "",
-    room_name: "",
     youtube_video_id: "",
     youtube_current_pos: 0,
     peer_id: "",
@@ -70,7 +69,6 @@ class Party extends React.Component {
         peer_id: this.props.match.params.host_id,
         user_name: data.user_name,
         youtube_video_id: data.youtube_video_id,
-        room_name: data.room_name,
         only_host_controls: data.only_host_controls,
         is_host: data.is_host,
         connected_users: connected_users,
