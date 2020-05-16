@@ -18,14 +18,16 @@ export function createConnection(
   const Peer = window.Peer;
   const settings = {
     debug: 2,
-    host: peer_js_url,
-    port: "",
-    path: "/myapp",
     // iceTransportPolicy: "relay",
     config: {
       iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
     }
   };
+  if (peer_js_url) {
+    settings.host = peer_js_url;
+    settings.port = "";
+    settings.path - "/myapp";
+  }
   if (turn_url) {
     settings.config.iceServers.push({
       urls: turn_url,
