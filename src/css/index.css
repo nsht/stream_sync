@@ -29,19 +29,20 @@ code {
 .row {
   display: flex;
   min-height: 100%;
-  height: 94vh;
+  /* height: 94vh; */
   align-items: center;
   justify-content: center;
 }
 
 .select_column {
   width: 50%;
-  height: 100%;
+  height: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3em;
+  font-size: 2.5em;
   transition: width 0.5s;
+  padding: 1rem;
   /* border: 2px solid black; */
 }
 

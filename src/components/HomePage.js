@@ -26,7 +26,16 @@ class HomePage extends React.Component {
               </div>
             </div>
           </div>
+          <div className="row">
+            <a className="select_column host" href="/host">
+              Host
+            </a>
+            <a className="select_column join" href="/join">
+              Join
+            </a>
+          </div>
         </section>
+        
         {/* TODO refactor for responsiveness with section and hero tags */}
         <div className="test_row">
           <div className="content_party">
@@ -58,14 +67,14 @@ class HomePage extends React.Component {
                 src={process.env.PUBLIC_URL + "/laptop_color.svg"}
               ></img>
             </div>
-            <h4>Play/Pause/Seek the video in Sync</h4>
+            <h4>Play/Pause/Hop the video in Sync</h4>
           </div>
           <div className="content_chat">
             <img
               className="floating"
               src={process.env.PUBLIC_URL + "/chat_color.svg"}
             ></img>
-            <h4>Chat!</h4>
+            <h4>Real-time conversation!</h4>
           </div>
         </div>
         <div className="row">
@@ -79,8 +88,8 @@ class HomePage extends React.Component {
         {/* <footer className="footer">
           <div className="content has-text-centered">
             <p>
-              <strong>Stream Sync</strong> by{" "}
-              <a href="https://jgthms.com">Stream Sync Inc.</a>
+              A <strong>Youtube Party</strong> by{" "}
+              <a href="">BitBox</a>
             </p>
           </div>
         </footer> */}
