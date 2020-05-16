@@ -23,7 +23,7 @@ export function createConnection(
   if (peer_js_url) {
     settings.host = peer_js_url;
     settings.port = "";
-    settings.path - "/myapp";
+    settings.path = "/myapp";
   }
   if (turn_url) {
     settings.config.iceServers.push({
