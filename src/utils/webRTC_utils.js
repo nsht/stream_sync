@@ -9,9 +9,6 @@ export function createConnection(
   previous_id = null
 ) {
   let peer_js_url = process.env.REACT_APP_PEERJS;
-  if (!peer_js_url) {
-    peer_js_url = "0.peerjs.com";
-  }
   let turn_url = process.env.REACT_APP_TURN;
   let turn_username = process.env.REACT_APP_TURN_USERNAME;
   let turn_credentials = process.env.REACT_APP_TURN_CREDENTIALS;
