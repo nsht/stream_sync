@@ -241,7 +241,8 @@ function handle_youtube(data) {
   if (state.youtube_video_id === "") {
     window.global_this_obj.setState({
       youtube_video_id: data.videoId,
-      youtube_current_pos: Math.ceil(data.startSeconds)
+      youtube_current_pos: Math.ceil(data.startSeconds),
+      player_state: data.event
     });
   } else {
     window.global_this_obj.setState({ isStateChangeFromBroadcastData: true });
