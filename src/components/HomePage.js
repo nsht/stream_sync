@@ -11,7 +11,7 @@ class HomePage extends React.Component {
             <div className="tile is-ancestor">
               <div className="tile is-6">
                 <div className="container homepage_left_hero">
-                  <h1 className="title has-text-centered">
+                  <h1 className="title has-text-centered not-selectable">
                     Watch YouTube Together with friends!
                   </h1>
                 </div>
@@ -77,13 +77,33 @@ class HomePage extends React.Component {
             <h4>Real-time conversation!</h4>
           </div>
         </div>
-        <div className="row">
-          <a className="select_column host" href="/host">
-            Host
-          </a>
-          <a className="select_column join" href="/join">
-            Join
-          </a>
+        <div className="about">
+          <figure class="snip red">
+            <figcaption>
+              <h2>Cristiano <span>Ronaldo</span></h2>
+              <p>Some things don't need the thought people give them.</p>
+              <div class="icons">
+                <a href="#"><i class="ion-social-twitter"></i></a>
+                <a href="#"><i class="ion-social-github"></i></a>
+                <a href="#"><i class="ion-social-linkedin"></i></a>
+              </div>	
+            </figcaption>
+            <img src="/cr7.jpg" alt="cr7"/>	
+            <div class="position">Footballer</div>
+          </figure>
+          <figure class="snip green">
+            <figcaption>
+              <h2>Cristiano <span>Ronaldo</span></h2>
+              <p>Some things don't need the thought people give them.</p>
+              <div class="icons">
+                <a href="#"><i class="ion-social-twitter"></i></a>
+                <a href="#"><i class="ion-social-github"></i></a>
+                <a href="#"><i class="ion-social-linkedin"></i></a>
+              </div>	
+            </figcaption>
+            <img src="/cr7.jpg" alt="sample6"/>	
+            <div class="position">Footballer</div>
+          </figure>
         </div>
         {/* <footer className="footer">
           <div className="content has-text-centered">
