@@ -56,7 +56,7 @@ class Host extends React.Component {
           <div className="container">
             <div className="columns is-centered">
               <div className="column is-half">
-                <div className="card">
+                <div className="card box">
                   <div className="card-content">
                     <form onSubmit={this.handleSubmit} className="room_name">
                       <div className="field">
@@ -94,17 +94,17 @@ class Host extends React.Component {
                             name="onlyHost"
                             ref={this.onlyHostRef}
                           />
-                          Only allow host to control video
+                          &nbsp;Only allow host to control video
                         </label>
                       </div>
                       <div className="buttons is-right">
                         <button
                           className={
-                            "button is-primary is-right" +
+                            "button is-primary" +
                             (this.state.submitted ? " is-loading" : "")
                           }
                         >
-                          Party🎉{" "}
+                            🥳 Party
                         </button>
                       </div>
                     </form>

@@ -30,7 +30,7 @@ class Join extends React.Component {
           <div className="container">
             <div className="columns is-centered">
               <div className="column is-half">
-                <div className="card">
+                <div className="card box">
                   <div className="card-content">
                     <form onSubmit={this.handleSubmit} className="room_name">
                       <div className="field">
@@ -39,7 +39,7 @@ class Join extends React.Component {
                           <input
                             className="input"
                             ref={this.roomNameRef}
-                            placeholder="Type the name of your room"
+                            placeholder="Type the room Id"
                             type="text"
                             name="RoomId"
                             required
@@ -47,8 +47,8 @@ class Join extends React.Component {
                         </div>
                       </div>
                       <div className="buttons is-right">
-                        <button className={"button is-primary is-right"}>
-                          Party🎉{" "}
+                        <button className={"button is-primary"}>
+                          🥳 Party
                         </button>
                       </div>
                     </form>

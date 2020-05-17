@@ -17,17 +17,17 @@ class Navbar extends React.Component {
               height="28"
               alt="Logo"
             ></img>
-            Youtube Party
+            YouTube Party
           </div>
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <div className="button is-primary">
-                <strong>Buy me a coffee</strong>
-              </div>
-              <a href="/host" target="_blank" className="button is-light">
+              <a className="button is-primary">
+                Buy me a coffee
+              </a>
+              <a href="/host" target="_blank" className="button">
                 Host
               </a>
             </div>
