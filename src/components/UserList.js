@@ -25,7 +25,8 @@ class UserList extends React.Component {
       <div className="box info_box">
         <h4>Connected Users</h4>
         <div className="avatar_container">{avatars}</div>
-        <ChangeVideo></ChangeVideo>
+        {(this.props.only_host_controls === false ||
+          this.props.is_host === true) && <ChangeVideo></ChangeVideo>}
       </div>
     );
   }

@@ -12,6 +12,9 @@ export function store_data(key, data) {
 
 export function update_data(data_key, key, value) {
   var data = get_data(data_key);
+  if (!data) {
+    return false;
+  }
   data[key] = value;
   store_data(data_key, data);
 }

@@ -12,17 +12,12 @@ class Navbar extends React.Component {
         <div className="navbar-brand">
           <div className="navbar-item" href="https://bulma.io">
             <img
-              src={process.env.PUBLIC_URL + "/logo.png"}
+              src={process.env.PUBLIC_URL + "/Stream_Sync.svg"}
               width="112"
               height="28"
               alt="Logo"
             ></img>
-          </div>
-        </div>
-
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-            <div className="navbar-item">Home</div>
+            Youtube Party
           </div>
         </div>
 

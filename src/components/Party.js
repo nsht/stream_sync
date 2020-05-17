@@ -19,7 +19,6 @@ import "react-toastify/dist/ReactToastify.min.css";
 class Party extends React.Component {
   state = {
     user_name: "",
-    room_name: "",
     youtube_video_id: "",
     youtube_current_pos: 0,
     peer_id: "",
@@ -60,14 +59,17 @@ class Party extends React.Component {
         var reconnect_users = JSON.parse(JSON.stringify(connected_users));
 
         delete reconnect_users[this.props.match.params.host_id];
-        bulk_connect(Object.keys(reconnect_users));
+        bulk_connect(
+          Object.keys(reconnect_users),
+          connected_users[this.props.match.params.host_id]
+        );
       }
 
       this.setState({
         peer_id: this.props.match.params.host_id,
         user_name: data.user_name,
         youtube_video_id: data.youtube_video_id,
-        room_name: data.room_name,
+        only_host_controls: data.only_host_controls,
         is_host: data.is_host,
         connected_users: connected_users,
         color_code: color_code
@@ -106,10 +108,10 @@ class Party extends React.Component {
     this.setState({ invite_popup_shown: true });
   };
 
-  notify = message => {
+  notify = (message,timeout=3000) => {
     toast.info(message, {
       position: "bottom-left",
-      autoClose: 3000,
+      autoClose: timeout,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -226,6 +228,8 @@ class Party extends React.Component {
                 ></Player>
                 <UserList
                   connected_users={this.state.connected_users}
+                  only_host_controls={this.state.only_host_controls}
+                  is_host={this.state.is_host}
                 ></UserList>
               </div>
               <div className="">

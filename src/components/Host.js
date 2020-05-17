@@ -7,7 +7,6 @@ import { store_data } from "../utils/data_storage_utils";
 class Host extends React.Component {
   state = {
     user_name: "",
-    room_name: "",
     youtube_video_id: "",
     host_peer_id: null,
     is_host: true,
@@ -16,11 +15,11 @@ class Host extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     var video_id = this.parseIdFromURL(e.target.youtubeLink.value);
-
+    console.log(e.target.onlyHost.checked);
     this.setState({
       user_name: e.target.userName.value,
-      room_name: e.target.roomName.value,
       youtube_video_id: video_id,
+      only_host_controls: e.target.onlyHost.checked,
       submitted: true
     });
     createConnection(this, true);
@@ -61,20 +60,6 @@ class Host extends React.Component {
                   <div className="card-content">
                     <form onSubmit={this.handleSubmit} className="room_name">
                       <div className="field">
-                        <label className="label">RoomName</label>
-                        <div className="control">
-                          <input
-                            className="input"
-                            ref={this.roomNameRef}
-                            placeholder="Type the name of your room"
-                            type="text"
-                            name="roomName"
-                            required
-                          ></input>
-                        </div>
-                      </div>
-
-                      <div className="field">
                         <label className="label">Username</label>
                         <div className="control">
                           <input
@@ -100,6 +85,17 @@ class Host extends React.Component {
                             required
                           ></input>
                         </div>
+                      </div>
+
+                      <div className="field">
+                        <label class="checkbox">
+                          <input
+                            type="checkbox"
+                            name="onlyHost"
+                            ref={this.onlyHostRef}
+                          />
+                          Only allow host to control video
+                        </label>
                       </div>
                       <div className="buttons is-right">
                         <button

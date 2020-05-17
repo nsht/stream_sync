@@ -8,25 +8,30 @@ export function createConnection(
   host_id = null,
   previous_id = null
 ) {
+  let peer_js_url = process.env.REACT_APP_PEERJS;
+  let turn_url = process.env.REACT_APP_TURN;
+  let turn_username = process.env.REACT_APP_TURN_USERNAME;
+  let turn_credentials = process.env.REACT_APP_TURN_CREDENTIALS;
   const Peer = window.Peer;
   const settings = {
     debug: 2,
-    host: "peerjs.nishit.xyz",
-    port:"",
-    path: "/myapp",
-    iceTransportPolicy: "relay",
-
+    // iceTransportPolicy: "relay",
     config: {
-      iceServers: [
-        { url: "stun:stun.l.google.com:19302" },
-        {
-          url: "turn:51.15.213.116:3478",
-          username: "nishit",
-          credential: "test123"
-        }
-      ]
+      iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
     }
   };
+  if (peer_js_url) {
+    settings.host = peer_js_url;
+    settings.port = "";
+    settings.path = "/myapp";
+  }
+  if (turn_url) {
+    settings.config.iceServers.push({
+      urls: turn_url,
+      username: turn_username,
+      credential: turn_credentials
+    });
+  }
 
   if (previous_id) {
     var peer = new Peer(previous_id, settings);
@@ -43,6 +48,7 @@ export function createConnection(
 
   peer.on("open", function(id) {
     console.log("MY peer ID is " + peer.id);
+    window.peer_id = peer.id;
     thisObj.setState({
       peer_id: peer.id
     });
@@ -58,6 +64,49 @@ export function createConnection(
     console.log("connection called");
     handle_connection(conn);
   });
+
+  peer.on("close", function() {
+    console.log("peer closed");
+    window.global_this_obj.notify("Network disconnected please refresh", 10000);
+  });
+
+  peer.on("disconnected", function() {
+    console.log("peer disconnected");
+    // peer.reconnect();
+    window.global_this_obj.notify("Network disconnected please refresh", 10000);
+  });
+
+  // peer.on("error", function(err) {
+  // window.global_this_obj.notify("Network disconnected please refresh",10000);
+
+  //   console.log(`peerjs error ${err}`);
+  //   var x = 0;
+  //   var intervalID = setInterval(function() {
+  //     if (is_online()) {
+  //       createConnection(
+  //         window.global_this_obj,
+  //         window.is_host,
+  //         window.global_this_obj.props.match.params.host_id,
+  //         window.peer_id
+  //       );
+  //       window.clearInterval(intervalID);
+  //     }
+
+  //     if (++x === 10) {
+  //       window.clearInterval(intervalID);
+  //     }
+  //   }, 1000);
+  // });
+}
+
+function is_online() {
+  fetch("https://corona-api.nishit.xyz/country/in")
+    .then(response => {
+      return true;
+    })
+    .catch(error => {
+      return false;
+    });
 }
 
 function handle_connection(conn) {
@@ -72,6 +121,9 @@ function handle_connection(conn) {
 
   conn.on("close", function() {
     var connected_users = window.global_this_obj.state.connected_users;
+    if (!connected_users || !connected_users[conn.peer]) {
+      return;
+    }
     const left_user_name = connected_users[conn.peer].user_name;
     delete connected_users[conn.peer];
     window.global_this_obj.setState({ connected_users: connected_users });
@@ -84,14 +136,15 @@ function handle_connection(conn) {
   window.connections.push(conn);
 
   if (window.is_host === true) {
-    setTimeout(function() {
-      sync_video();
-      var msg_user_list = {
-        data_type: "user_list",
-        user_list: window.global_this_obj.state.connected_users
-      };
-      send_data(msg_user_list);
-    }, 1500);
+    // setTimeout(function() {
+    //   sync_video();
+    //   var msg_user_list = {
+    //     data_type: "user_list",
+    //     user_list: window.global_this_obj.state.connected_users,
+    //     only_host_controls: window.global_this_obj.state.only_host_controls
+    //   };
+    //   send_data(msg_user_list);
+    // }, 3000);
     broadcast_new_connection(conn.peer);
   }
 }
@@ -138,12 +191,17 @@ function connect_to_peer(peer_id) {
   handle_connection(conn);
 }
 
-export function bulk_connect(peer_ids) {
+export function bulk_connect(peer_ids, host_data) {
   for (let id in peer_ids) {
     setTimeout(function() {
       connect_to_peer(peer_ids[id]);
-    }, 500);
+    }, 250);
   }
+  const wait_time = 250 * peer_ids.length + 100;
+  setTimeout(function() {
+    console.log("intro called");
+    introduce(host_data.user_name, host_data.color_code);
+  }, wait_time);
 }
 // Chat utils
 function chat_handler(chat_data) {
@@ -193,17 +251,23 @@ function handle_youtube(data) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(data.startSeconds, true);
       player.pauseVideo();
+      window.global_this_obj.notify(`${data.user_name} paused the video`);
     } else if (data.event === 1) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(Math.ceil(data.startSeconds), true);
       player.playVideo();
+      window.global_this_obj.notify(`${data.user_name} started the video`);
     } else if (data.event === 3) {
       // isStateChangeFromBroadcastData = true;
       player.seekTo(data.startSeconds, true);
       player.pauseVideo();
+      window.global_this_obj.notify(`${data.user_name} is buffering`);
     } else if (data.event === "playbackRateChange") {
       player.seekTo(data.startSeconds, true);
       player.setPlaybackRate(data.playbackRate);
+      window.global_this_obj.notify(
+        `${data.user_name} changed the playback rate to ${data.playbackRate}x`
+      );
     }
     setTimeout(function() {
       window.global_this_obj.setState({
@@ -214,6 +278,12 @@ function handle_youtube(data) {
 }
 
 export function sync_video(event = null) {
+  if (
+    window.global_this_obj.state.only_host_controls === true &&
+    window.is_host !== true
+  ) {
+    return;
+  }
   var payload_data = fetch_current_video_status(event);
   send_data(payload_data);
 }
@@ -221,8 +291,7 @@ export function sync_video(event = null) {
 function fetch_current_video_status(event) {
   var yt_event;
   const player = window.yt_player;
-
-  if (event != null) {
+  if (event !== null) {
     yt_event = event;
   } else {
     yt_event = player.getPlayerState();
@@ -234,6 +303,7 @@ function fetch_current_video_status(event) {
 
   var payload = {
     data_type: "youtube",
+    user_name: window.global_this_obj.state.user_name,
     event: yt_event,
     videoId: videoId,
     startSeconds: startSeconds,
@@ -262,11 +332,23 @@ function handle_intro(data) {
   window.global_this_obj.notify(`${data.user_name} has joined the party`);
   if (window.is_host) {
     update_data(window.peer_obj.id, "connected_users", connected_users);
+    setTimeout(function() {
+      sync_video();
+      var msg_user_list = {
+        data_type: "user_list",
+        user_list: window.global_this_obj.state.connected_users,
+        only_host_controls: window.global_this_obj.state.only_host_controls
+      };
+      send_data(msg_user_list);
+    }, 250);
   }
 }
 
 function handle_intro_init(data) {
-  window.global_this_obj.setState({ connected_users: data.user_list });
+  window.global_this_obj.setState({
+    connected_users: data.user_list,
+    only_host_controls: data.only_host_controls
+  });
 }
 
 export function introduce(user_name, color_code) {
