@@ -36,7 +36,6 @@ class Player extends React.Component {
     this.state.player = new window.YT.Player(`youtube-player-iframe`, {
       videoId: this.props.youtube_video_id,
       playerVars: {
-        autoplay: 1,
         start: Math.ceil(this.props.youtube_current_pos)
       },
       events: {
@@ -49,7 +48,9 @@ class Player extends React.Component {
   };
 
   onPlayerReady = event => {
-    event.target.playVideo();
+    if (this.props.player_state === 1) {
+      event.target.playVideo();
+    }
   };
   onPlayerStateChange = event => {
     if (!this.props.isStateChangeFromBroadcastData) {
