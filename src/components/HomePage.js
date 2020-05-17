@@ -12,7 +12,7 @@ class HomePage extends React.Component {
               <div className="tile is-6">
                 <div className="container homepage_left_hero">
                   <h1 className="title has-text-centered not-selectable">
-                    Watch YouTube Together with friends!
+                    Watch YouTube Together with Friends!
                   </h1>
                 </div>
               </div>
@@ -114,13 +114,8 @@ class HomePage extends React.Component {
         {/* <footer className="footer">
           <div className="content has-text-centered">
             <p>
-<<<<<<< HEAD
               A <strong>Youtube Party</strong> by{" "}
               <a href="">BitBox</a>
-=======
-              <strong>YouTube Party</strong> by{" "}
-              <a href="https://youtubeparty.netlify.app/">Stream Sync Inc.</a>
->>>>>>> db1858d922e6da002a322a1d67de7a9f7d2ee76b
             </p>
             <p>© 2020 Stream Sync Inc</p>
           </div>

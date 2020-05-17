@@ -27,7 +27,7 @@ class ChangeVideo extends React.Component {
               />
             </p>
             <p className="control">
-              <button className="button is-primary is-right">
+              <button className="button is-primary">
                 Change Video
               </button>
             </p>

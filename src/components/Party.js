@@ -155,11 +155,8 @@ class Party extends React.Component {
                     />
                   </p>
                   <p className="control">
-                    <button className="button is-primary is-light is-right">
-                      Party{" "}
-                      <span role="img" aria-label="party_emoji">
-                        🎉
-                      </span>
+                    <button className="button is-primary">
+                       🥳 Party
                     </button>
                   </p>
                 </div>
@@ -196,11 +193,11 @@ class Party extends React.Component {
                     />
                   </p>
                   <p className="control">
-                    <button className="button is-primary is-light is-right">
-                      Copy to clipboard
+                    <button className="button is-primary">
                       <span role="img" aria-label="cliboard_emoji">
                         📋
                       </span>
+                      &nbsp;Copy to clipboard
                     </button>
                   </p>
                 </div>
