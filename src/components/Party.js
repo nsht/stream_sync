@@ -27,7 +27,8 @@ class Party extends React.Component {
     invite_popup_shown: false,
     connected_users: {},
     color_code: "",
-    isStateChangeFromBroadcastData: false
+    isStateChangeFromBroadcastData: false,
+    player_state: false,
   };
 
   constructor(props) {
@@ -108,7 +109,7 @@ class Party extends React.Component {
     this.setState({ invite_popup_shown: true });
   };
 
-  notify = (message,timeout=3000) => {
+  notify = (message, timeout = 3000) => {
     toast.info(message, {
       position: "bottom-left",
       autoClose: timeout,
@@ -222,6 +223,7 @@ class Party extends React.Component {
                   isStateChangeFromBroadcastData={
                     this.state.isStateChangeFromBroadcastData
                   }
+                  player_state = {this.state.player_state}
                 ></Player>
                 <UserList
                   connected_users={this.state.connected_users}
