@@ -274,7 +274,7 @@ function handle_youtube(data) {
       window.global_this_obj.setState({
         isStateChangeFromBroadcastData: false
       });
-    }, 1500);
+    }, 2500);
   }
 }
 
