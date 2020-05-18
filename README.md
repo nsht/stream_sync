@@ -2,5 +2,6 @@
 
 # Youtube Fiesta 🥳
 
-Watch Youtube In Sync With friends.
+Watch Youtube in sync with friends.
+
 [YoutubeFiesta.com](https://youtubefiesta.com)
