@@ -86,7 +86,7 @@ class HomePage extends React.Component {
         <div className="about">
           <figure class="snip red">
             <figcaption>
-              <h2>Cristiano <span>Ronaldo</span></h2>
+              <h2>Cristiano <span>Staging test</span></h2>
               <p>Some things don't need the thought people give them.</p>
               <div class="icons">
                 <a href="#"><i class="ion-social-twitter"></i></a>
