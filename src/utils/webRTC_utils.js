@@ -274,7 +274,7 @@ function handle_youtube(data) {
       window.global_this_obj.setState({
         isStateChangeFromBroadcastData: false
       });
-    }, 500);
+    }, 1500);
   }
 }
 
@@ -283,6 +283,9 @@ export function sync_video(event = null) {
     window.global_this_obj.state.only_host_controls === true &&
     window.is_host !== true
   ) {
+    return;
+  }
+  if (window.global_this_obj.state.isStateChangeFromBroadcastData) {
     return;
   }
   var payload_data = fetch_current_video_status(event);
