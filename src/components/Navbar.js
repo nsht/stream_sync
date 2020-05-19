@@ -11,12 +11,14 @@ class Navbar extends React.Component {
       >
         <div className="navbar-brand">
           <div className="navbar-item">
-            <img
-              src={process.env.PUBLIC_URL + "/Stream_Sync.svg"}
-              width="112"
-              height="28"
-              alt="Logo"
-            ></img>
+            <a href={window.location.origin}>
+              <img
+                src={process.env.PUBLIC_URL + "/Stream_Sync.svg"}
+                width="112"
+                height="28"
+                alt="Logo"
+              ></img>
+            </a>
             <a href={window.location.origin}>YouTube Fiesta</a>
           </div>
         </div>
