@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/Stream_Sync.svg" />
+    <link rel="icon" href="https://youtubefiesta.com/Stream_Sync.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
@@ -10,12 +10,40 @@
     />
     <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
 
+    <!-- Meta Tags -->
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="YouTube Fiesta is a site which allows you to watch YouTube with friends."
     />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/Stream_Sync.svg" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="YouTubeFiesta.com - Watch YouTube with friends."
+    />
+    <meta property="og:url" content="https://YouTubeFiesta.com" />
+    <meta
+      property="og:description"
+      content="YouTube Fiesta is a site which allows you to watch YouTube with friends."
+    />
+    <meta
+      property="og:site_name"
+      content="YouTubeFiesta.com - Watch YouTube with friends."
+    />
+    <meta property="og:image" content="https://youtubefiesta.com/banner.png" />
+    <meta property="og:image:width" content="768" />
+    <meta property="og:image:height" content="435" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="YouTubeFiesta.com - Watch YouTube with friends."
+    />
+    <meta
+      name="twitter:description"
+      content="YouTube Fiesta is a site which allows you to watch YouTube with friends."
+    />
+    <meta name="twitter:image" content="https://youtubefiesta.com/banner.png" />
+    <link rel="apple-touch-icon" href="https://youtubefiesta.com/Stream_Sync.svg" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -46,4 +74,18 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-166974108-1"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "UA-166974108-1");
+  </script>
 </html>

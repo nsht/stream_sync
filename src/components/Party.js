@@ -28,7 +28,7 @@ class Party extends React.Component {
     connected_users: {},
     color_code: "",
     isStateChangeFromBroadcastData: false,
-    player_state: false,
+    player_state: false
   };
 
   constructor(props) {
@@ -117,7 +117,8 @@ class Party extends React.Component {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined
+      progress: undefined,
+      toastId: message
     });
   };
 
@@ -156,9 +157,7 @@ class Party extends React.Component {
                     />
                   </p>
                   <p className="control">
-                    <button className="button is-primary">
-                       🥳 Party
-                    </button>
+                    <button className="button is-primary">🥳 Party</button>
                   </p>
                 </div>
               </form>
@@ -223,7 +222,7 @@ class Party extends React.Component {
                   isStateChangeFromBroadcastData={
                     this.state.isStateChangeFromBroadcastData
                   }
-                  player_state = {this.state.player_state}
+                  player_state={this.state.player_state}
                 ></Player>
                 <UserList
                   connected_users={this.state.connected_users}
