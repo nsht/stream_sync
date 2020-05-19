@@ -17,7 +17,7 @@ class Navbar extends React.Component {
               height="28"
               alt="Logo"
             ></img>
-            <a href="https://youtubefiesta.com">YouTube Fiesta</a>
+            <a href={process.env.PUBLIC_URL}>YouTube Fiesta</a>
           </div>
         </div>
 
