@@ -100,9 +100,10 @@ class Chat extends React.Component {
               />
             </p>
             <p className="control">
-            <button
-                className="button is-primary chat-send">
-                Send
+              <button
+                className="button is-primary">
+                <i class="icon icon ion-ios-paperplane" style={{fontSize: "xx-large", 
+                alignItems: "normal", height: "1em"}}></i>
               </button>
             </p>
           </div>

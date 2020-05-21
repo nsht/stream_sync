@@ -11,7 +11,7 @@ class Navbar extends React.Component {
       >
         <div className="navbar-brand">
           <div className="navbar-item">
-            <a href="https://youtubefiesta.com">
+            <a href="#">
               <img
                   src={process.env.PUBLIC_URL + "/Stream_Sync.svg"}
                   width="112"
@@ -19,14 +19,14 @@ class Navbar extends React.Component {
                   alt="Logo">
               </img>
             </a>
-            <a href="{process.env.PUBLIC_URL}">YouTube Fiesta</a>
+            <a href="#">YouTube Fiesta</a>
           </div>
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary">Buy me a coffee</a>
+              <a className="button is-primary" href="https://www.paypal.me/jeff007ali" target="_blank">Buy me a coffee</a>
               <a href="/host" target="_blank" className="button is-light">
                 Host
               </a>

@@ -191,6 +191,17 @@ code {
   margin: 12px;
 }
 
+/* .ion-ios-paperplane{
+  font-size: xx-large; 
+  align-items: normal;
+  height: 1em;
+} */
+
+/* .ion-ios-paperplane::before{
+    content: "\f474";
+    transform: translate(0, -0.2vw);
+} */
+
 .sync_svg {
   height: 100px;
 
@@ -255,7 +266,7 @@ code {
   align-content: center;
   justify-content: center;
   align-items: center;
-  background-color: var(--google-blue-700);
+  background-color: var(--paper-blue-700);
 }
 
 .test_row .content_sync {
@@ -342,6 +353,7 @@ code {
 }
 
 .navbar-item a {
+  max-height: 2.5rem;
   color: white;
   cursor: pointer;
   text-decoration: none;
