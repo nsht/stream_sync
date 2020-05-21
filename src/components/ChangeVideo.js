@@ -13,8 +13,7 @@ class ChangeVideo extends React.Component {
 
   render() {
     return (
-      <div className="">
-        <hr className="changeVideo_divider"></hr>
+      <div className="change-video">
         <form onSubmit={this.changeVideo}>
           <div className="field is-grouped">
             <p className="control is-expanded">
@@ -27,9 +26,7 @@ class ChangeVideo extends React.Component {
               />
             </p>
             <p className="control">
-              <button className="button is-primary">
-                Change Video
-              </button>
+              <button className="button is-primary">Change</button>
             </p>
           </div>
         </form>

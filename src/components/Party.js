@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Chat from "./Chat";
 import Player from "./Player";
 import UserList from "./UserList";
+import ChangeVideo from "./ChangeVideo";
 
 import { get_data } from "../utils/data_storage_utils";
 import {
@@ -224,14 +225,13 @@ class Party extends React.Component {
                   }
                   player_state={this.state.player_state}
                 ></Player>
-                <UserList
+                {(this.state.only_host_controls === false ||
+                  this.state.is_host === true) && <ChangeVideo></ChangeVideo>}
+              </div>
+              <div className="chat-window">
+                <Chat
                   connected_users={this.state.connected_users}
                   only_host_controls={this.state.only_host_controls}
-                  is_host={this.state.is_host}
-                ></UserList>
-              </div>
-              <div className="">
-                <Chat
                   user_name={this.state.user_name}
                   chat_log={this.state.chat_log}
                   is_host={this.state.is_host}

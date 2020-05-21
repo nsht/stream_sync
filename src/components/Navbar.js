@@ -10,24 +10,30 @@ class Navbar extends React.Component {
         aria-label="main navigation"
       >
         <div className="navbar-brand">
-          <div className="navbar-item" href="https://bulma.io">
-            <img
-              src={process.env.PUBLIC_URL + "/Stream_Sync.svg"}
-              width="112"
-              height="28"
-              alt="Logo"
-            ></img>
-            YouTube Party
+          <div className="navbar-item">
+            <a href={window.location.origin}>
+              <img
+                src={process.env.PUBLIC_URL + "/Stream_Sync.svg"}
+                width="112"
+                height="28"
+                alt="Logo"
+              ></img>
+            </a>
+            <a href={window.location.origin}>YouTube Fiesta</a>
           </div>
         </div>
 
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary">
-                Buy me a coffee
+              <a href="https://www.buymeacoffee.com/nishit"className="bmac_link" target="_blank">
+                <img
+                  src="https://cdn.buymeacoffee.com/buttons/lato-red.png"
+                  alt="Buy Me A Coffee"
+                  className="bmac"
+                ></img>
               </a>
-              <a href="/host" target="_blank" className="button">
+              <a href="/host" target="_blank" className="button is-light">
                 Host
               </a>
             </div>
