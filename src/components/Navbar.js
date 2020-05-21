@@ -26,7 +26,13 @@ class Navbar extends React.Component {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary" href="https://www.paypal.me/jeff007ali" target="_blank">Buy me a coffee</a>
+              <a href="https://www.buymeacoffee.com/nishit"className="bmac_link" target="_blank">
+                <img
+                  src="https://cdn.buymeacoffee.com/buttons/lato-red.png"
+                  alt="Buy Me A Coffee"
+                  className="bmac"
+                ></img>
+              </a>
               <a href="/host" target="_blank" className="button is-light">
                 Host
               </a>
