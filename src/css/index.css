@@ -116,7 +116,7 @@ code {
 }
 
 .chat_box {
-  height: 66vh;
+  height: 55vh;
   overflow-y: auto;
 }
 
@@ -150,10 +150,14 @@ code {
   color: white;
   text-transform: uppercase;
   margin: 5px;
+  display: inline-block;
 }
 
 .avatar_container {
-  display: flex;
+  /* display: flex; */
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .info_box {
@@ -528,6 +532,31 @@ figure.snip.hover > img {
   align-items: center;
   justify-content: center;
   background-color: #212121;
+}
+
+.bmac_link {
+  padding-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.bmac {
+  height: 51px !important;
+  width: 170px !important;
+  max-width: 170px !important;
+  border-radius: 3px;
+}
+
+.change-video {
+  padding: 1rem 1rem 0 0;
+}
+
+.chat-window {
+  padding-left: 0.8rem;
+  width: 34%;
+}
+
+.container {
+  max-width: 98% !important;
 }
 
 html:not(.style-scope) {
