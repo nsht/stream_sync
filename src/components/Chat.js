@@ -3,6 +3,8 @@ import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 import { send_chat } from "../utils/webRTC_utils";
 import ChatBubble from "./ChatBubble";
+import UserList from "./UserList";
+
 class Chat extends React.Component {
   constructor(props) {
     super(props);
@@ -57,6 +59,11 @@ class Chat extends React.Component {
   render() {
     return (
       <div className="box">
+        <UserList
+          connected_users={this.props.connected_users}
+          only_host_controls={this.props.only_host_controls}
+          is_host={this.props.is_host}
+        ></UserList>
         <div className="box chat_box" onClick={this.closeMenu}>
           {this.props.chat_log.map((chat_data, index) => {
             return <ChatBubble key={index} chat_data={chat_data}></ChatBubble>;
@@ -100,10 +107,15 @@ class Chat extends React.Component {
               />
             </p>
             <p className="control">
-              <button
-                className="button is-primary">
-                <i class="icon icon ion-ios-paperplane" style={{fontSize: "xx-large", 
-                alignItems: "normal", height: "1em"}}></i>
+              <button className="button is-primary">
+                <i
+                  class="icon icon ion-ios-paperplane"
+                  style={{
+                    fontSize: "xx-large",
+                    alignItems: "normal",
+                    height: "1em"
+                  }}
+                ></i>
               </button>
             </p>
           </div>
