@@ -22,7 +22,7 @@ class UserList extends React.Component {
       );
     }
     return (
-      <div className="info_box">
+      <div className="">
         <h4>Connected Users</h4>
         <div className="avatar_container">{avatars}</div>
       </div>

@@ -116,7 +116,7 @@ code {
 }
 
 .chat_box {
-  height: 55vh;
+  height: 57vh;
   overflow-y: auto;
 }
 
@@ -162,7 +162,7 @@ code {
 
 .info_box {
   margin-top: 2%;
-  margin-right: 2%;
+  /* margin-right: 2%; */
 }
 
 .changeVideo_divider {
@@ -400,6 +400,11 @@ img {
   color: #fff;
   font-weight: bold;
 }
+
+/* .section {
+  padding: 2.5rem 1rem;
+} */
+
 
 /* Scrollbar - start */
 /* width */
