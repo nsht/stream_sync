@@ -87,7 +87,7 @@ class HomePage extends React.Component {
         <div className="grid_row">
           <div className = "about_right">
           <figure className="snip">
-            <div className="profile-image"><img src="/jeff2.jpg" alt="JeffAli"/>
+            <div className="profile-image"><img src="/jeff.jpg" alt="JeffAli"/>
               <div className="icons"><a href="https://twitter.com/jeff007ali" target="_blank"><i className="ion-social-twitter"></i></a>
                 <a href="https://github.com/jeff007ali" target="_blank"> <i className="ion-social-github"></i></a>
                 <a href="https://www.linkedin.com/in/jafar-ali-agharia-2645b3104" target="_blank"> <i className="ion-social-linkedin"></i></a>
