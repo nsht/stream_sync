@@ -37,7 +37,7 @@ class HomePage extends React.Component {
         </section>
         
         {/* TODO refactor for responsiveness with section and hero tags */}
-        <div className="test_row">
+        <div className="grid_row">
           <div className="content_party">
             <img
               alt="party_icon"
@@ -83,33 +83,38 @@ class HomePage extends React.Component {
             <h4>Real-time conversation!</h4>
           </div>
         </div>
-        <div className="about">
-          <figure class="snip red">
+
+        <div className="grid_row">
+          <div className = "about_right">
+          <figure className="snip">
+            <div className="profile-image"><img src="/jeff2.jpg" alt="JeffAli"/>
+              <div className="icons"><a href="https://twitter.com/jeff007ali" target="_blank"><i className="ion-social-twitter"></i></a>
+                <a href="https://github.com/jeff007ali" target="_blank"> <i className="ion-social-github"></i></a>
+                <a href="https://www.linkedin.com/in/jafar-ali-agharia-2645b3104" target="_blank"> <i className="ion-social-linkedin"></i></a>
+              </div>
+            </div>
             <figcaption>
-              <h2>Cristiano <span>Staging test</span></h2>
-              <p>Some things don't need the thought people give them.</p>
-              <div class="icons">
-                <a href="#"><i class="ion-social-twitter"></i></a>
-                <a href="#"><i class="ion-social-github"></i></a>
-                <a href="#"><i class="ion-social-linkedin"></i></a>
-              </div>	
+              <h3>Jafar Ali</h3>
+              <h4>Software Developer</h4>
+              <p>"When the world sleeps, we code, we build, we launch."</p>
             </figcaption>
-            <img src="/cr7.jpg" alt="cr7"/>	
-            <div class="position">Footballer</div>
           </figure>
-          <figure class="snip green">
+          </div>
+          <div className="about_left">
+          <figure className="snip">
+            <div className="profile-image"><img src="/nishit.jpg" alt="Nishit"/>
+            <div className="icons"><a href="#" target="_blank"><i className="ion-social-twitter"></i></a>
+                <a href="#" target="_blank"> <i className="ion-social-github"></i></a>
+                <a href="#" target="_blank"> <i className="ion-social-linkedin"></i></a>
+              </div>
+            </div>
             <figcaption>
-              <h2>Cristiano <span>Ronaldo</span></h2>
-              <p>Some things don't need the thought people give them.</p>
-              <div class="icons">
-                <a href="#"><i class="ion-social-twitter"></i></a>
-                <a href="#"><i class="ion-social-github"></i></a>
-                <a href="#"><i class="ion-social-linkedin"></i></a>
-              </div>	
+              <h3>Nishit Mohanan</h3>
+              <h4>Software Developer</h4>
+              <p>TODO: add quote with 2 lines</p>
             </figcaption>
-            <img src="/cr7.jpg" alt="sample6"/>	
-            <div class="position">Footballer</div>
           </figure>
+          </div>
         </div>
         {/* <footer className="footer">
           <div className="content has-text-centered">
