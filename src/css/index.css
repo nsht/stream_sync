@@ -401,6 +401,11 @@ img {
   font-weight: bold;
 }
 
+input[type=text]:focus, textarea:focus {
+  box-shadow: 0 0 3px var(--paper-red-a400);
+  border: 1px solid var(--paper-red-a400);
+}
+
 /* .section {
   padding: 2.5rem 1rem;
 } */
