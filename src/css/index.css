@@ -401,7 +401,7 @@ img {
   font-weight: bold;
 }
 
-input[type=text]:focus, textarea:focus {
+input[type=text]:focus, textarea:focus, input[type=url]:focus {
   box-shadow: 0 0 3px var(--paper-red-a400);
   border: 1px solid var(--paper-red-a400);
 }
