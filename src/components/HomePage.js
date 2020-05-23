@@ -21,7 +21,7 @@ class HomePage extends React.Component {
                   className="hero_video"
                   autoPlay="true"
                   loop="true"
-                  src={process.env.PUBLIC_URL + "/intro_video.mp4"}
+                  src={process.env.PUBLIC_URL + "/introductory_video.mp4"}
                 ></video>
               </div>
             </div>
