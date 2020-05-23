@@ -21,7 +21,7 @@ class HomePage extends React.Component {
                   className="hero_video"
                   autoPlay="true"
                   loop="true"
-                  src={process.env.PUBLIC_URL + "/temp.webm"}
+                  src={process.env.PUBLIC_URL + "/intro_video.mp4"}
                 ></video>
               </div>
             </div>
@@ -107,7 +107,7 @@ class HomePage extends React.Component {
                 </div>
               </div>
               <figcaption>
-                <h3>Jafar Ali</h3>
+                <h3>Jeff Ali</h3>
                 <h4>Software Developer</h4>
                 <p>"When the world sleeps, we code, we build, we launch."</p>
               </figcaption>
