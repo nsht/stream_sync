@@ -143,6 +143,18 @@ class HomePage extends React.Component {
             </figure>
           </div>
         </div>
+        <a
+          href="https://www.producthunt.com/posts/youtube-fiesta?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-youtube-fiesta"
+          target="_blank"
+        >
+          <img
+            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=202836&theme=light"
+            alt="Youtube Fiesta - Watch Youtube with friends in sync! | Product Hunt Embed"
+            style="width: 250px; height: 54px;"
+            width="250px"
+            height="54px"
+          />
+        </a>
         {/* <footer className="footer">
           <div className="content has-text-centered">
             <p>
