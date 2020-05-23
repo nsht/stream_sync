@@ -13,26 +13,25 @@ class ChangeVideo extends React.Component {
 
   render() {
     return (
-      <div className="">
-        <hr className="changeVideo_divider"></hr>
-        <form onSubmit={this.changeVideo}>
-          <div className="field is-grouped">
-            <p className="control is-expanded">
-              <input
-                className="input"
-                type="text"
-                name="video_url"
-                placeholder="Enter new video URL"
-                required
-              />
-            </p>
-            <p className="control">
-              <button className="button is-primary">
-                Change Video
-              </button>
-            </p>
-          </div>
-        </form>
+      <div className="box info_box">
+        <div className="">
+          <form onSubmit={this.changeVideo}>
+            <div className="field is-grouped">
+              <p className="control is-expanded">
+                <input
+                  className="input"
+                  type="text"
+                  name="video_url"
+                  placeholder="Enter new video URL"
+                  required
+                />
+              </p>
+              <p className="control">
+                <button className="button is-primary">Change</button>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

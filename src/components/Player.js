@@ -35,6 +35,8 @@ class Player extends React.Component {
   loadVideo = () => {
     this.state.player = new window.YT.Player(`youtube-player-iframe`, {
       videoId: this.props.youtube_video_id,
+      width: 830,
+      height: 450,
       playerVars: {
         start: Math.ceil(this.props.youtube_current_pos)
       },
