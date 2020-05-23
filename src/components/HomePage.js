@@ -150,9 +150,10 @@ class HomePage extends React.Component {
           <img
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=202836&theme=light"
             alt="Youtube Fiesta - Watch Youtube with friends in sync! | Product Hunt Embed"
-            style="width: 250px; height: 54px;"
+            style={{width: "250px",height: "54px"}}
             width="250px"
             height="54px"
+            className="product_hunt_button"
           />
         </a>
         {/* <footer className="footer">
