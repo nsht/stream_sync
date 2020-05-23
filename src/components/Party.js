@@ -180,7 +180,7 @@ class Party extends React.Component {
           <div className="modal-content">
             <div className="box">
               <form onSubmit={this.copyToClipboard}>
-                <label>Share the link with friends to stream together</label>
+                <label>Share this link with friends to watch YouTube together</label>
 
                 <div className="field is-grouped">
                   <p className="control is-expanded">
@@ -198,7 +198,7 @@ class Party extends React.Component {
                       <span role="img" aria-label="cliboard_emoji">
                         📋
                       </span>
-                      &nbsp;Copy to clipboard
+                      &nbsp;Copy Invite Link
                     </button>
                   </p>
                 </div>
