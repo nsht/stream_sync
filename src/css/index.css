@@ -401,7 +401,9 @@ img {
   font-weight: bold;
 }
 
-input[type=text]:focus, textarea:focus, input[type=url]:focus {
+input[type="text"]:focus,
+textarea:focus,
+input[type="url"]:focus {
   box-shadow: 0 0 3px var(--paper-red-a400);
   border: 1px solid var(--paper-red-a400);
 }
@@ -409,7 +411,6 @@ input[type=text]:focus, textarea:focus, input[type=url]:focus {
 /* .section {
   padding: 2.5rem 1rem;
 } */
-
 
 /* Scrollbar - start */
 /* width */
@@ -437,102 +438,102 @@ input[type=text]:focus, textarea:focus, input[type=url]:focus {
 /* Profile card - start*/
 
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-  @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-  .snip {
-    box-shadow: none !important;
-    color: #141414;
-    display: inline-block;
-    font-family: 'Open Sans', Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.4em;
-    margin: 10px;
-    max-width: 315px;
-    min-width: 230px;
-    position: relative;
-    text-align: left;
-    width: 100%;
-  }
-  
-  .snip * {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  
-  .snip .profile-image img {
-    border-radius: 5px;
-    max-width: 100%;
-    height: 120px;
-    vertical-align: top;
-    float: left;
-    margin-right: 10px;
-  }
-  
-  .snip figcaption {
-    background-color: #333333;
-    border-radius: 5px;
-    color: #fff;
-    display: inline-block;
-    margin-top: 15px;
-    padding: 25px;
-    position: relative;
-    width: 100%;
-  }
-  
-  .snip figcaption:after {
-    border-color: transparent transparent #333333 transparent;
-    border-style: solid;
-    border-width: 0 10px 10px 10px;
-    bottom: 100%;
-    content: '';
-    height: 0;
-    left: 32px;
-    position: absolute;
-    width: 0;
-  }
-  
-  .snip h3,
-  .snip h4,
-  .snip p {
-    margin: 0 0 5px;
-  }
-  
-  .snip h3 {
-    font-weight: 600;
-    font-size: 1.2em;
-    font-family: 'Montserrat', Arial, sans-serif;
-  }
-  
-  .snip h4 {
-    color: #8c8c8c;
-    font-weight: 400;
-    letter-spacing: 2px;
-  }
-  
-  .snip p {
-    font-size: 0.9em;
-    letter-spacing: 1px;
-    opacity: 0.9;
-  }
-  
-  .snip .icons {
-    padding: 87px 70px 0px 70px;
-  }
-  
-  .snip i {
-    color: #ffffff;
-    display: inline-block;
-    font-size: 33px;
-    font-weight: normal;
-    opacity: 0.75;
-    padding: 0px 2px;
-  }
-  
-  .snip i:hover {
-    opacity: 1;
-    -webkit-transition: all 0.35s ease;
-    transition: all 0.35s ease;
-  }
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.snip {
+  box-shadow: none !important;
+  color: #141414;
+  display: inline-block;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4em;
+  margin: 10px;
+  max-width: 315px;
+  min-width: 230px;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+.snip * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.snip .profile-image img {
+  border-radius: 5px;
+  max-width: 100%;
+  height: 120px;
+  vertical-align: top;
+  float: left;
+  margin-right: 10px;
+}
+
+.snip figcaption {
+  background-color: #333333;
+  border-radius: 5px;
+  color: #fff;
+  display: inline-block;
+  margin-top: 15px;
+  padding: 25px;
+  position: relative;
+  width: 100%;
+}
+
+.snip figcaption:after {
+  border-color: transparent transparent #333333 transparent;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  bottom: 100%;
+  content: "";
+  height: 0;
+  left: 32px;
+  position: absolute;
+  width: 0;
+}
+
+.snip h3,
+.snip h4,
+.snip p {
+  margin: 0 0 5px;
+}
+
+.snip h3 {
+  font-weight: 600;
+  font-size: 1.2em;
+  font-family: "Montserrat", Arial, sans-serif;
+}
+
+.snip h4 {
+  color: #8c8c8c;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.snip p {
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.snip .icons {
+  padding: 87px 70px 0px 70px;
+}
+
+.snip i {
+  color: #ffffff;
+  display: inline-block;
+  font-size: 33px;
+  font-weight: normal;
+  opacity: 0.75;
+  padding: 0px 2px;
+}
+
+.snip i:hover {
+  opacity: 1;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
 
 /* Profile card - End */
 
@@ -579,6 +580,13 @@ input[type=text]:focus, textarea:focus, input[type=url]:focus {
 
 .container {
   max-width: 98% !important;
+}
+
+.product_hunt_button {
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
 }
 
 html:not(.style-scope) {
