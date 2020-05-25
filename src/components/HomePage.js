@@ -159,7 +159,7 @@ class HomePage extends React.Component {
         {/* <footer className="footer">
           <div className="content has-text-centered">
             <p>
-              A <strong>Youtube Party</strong> by{" "}
+              A <strong>Youtube Fiesta</strong> by{" "}
               <a href="">BitBox</a>
             </p>
             <p>© 2020 Stream Sync Inc</p>
