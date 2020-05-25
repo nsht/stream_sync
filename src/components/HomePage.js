@@ -14,6 +14,10 @@ class HomePage extends React.Component {
                   <h1 className="title has-text-centered not-selectable">
                     Watch YouTube Together with Friends!
                   </h1>
+                  <h2 class="subtitle has-text-centered not-selectable">
+                    Chat with friends and watch videos in sync<br></br>
+                    Your data remains secure on your devices
+                  </h2>
                 </div>
               </div>
               <div className="tile is-6">
@@ -91,16 +95,25 @@ class HomePage extends React.Component {
               <div className="profile-image">
                 <img src="/jeff.jpg" alt="JeffAli" />
                 <div className="icons">
-                  <a href="https://twitter.com/jeff007ali" target="_blank">
+                  <a
+                    href="https://twitter.com/jeff007ali"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i className="ion-social-twitter"></i>
                   </a>
-                  <a href="https://github.com/jeff007ali" target="_blank">
+                  <a
+                    href="https://github.com/jeff007ali"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {" "}
                     <i className="ion-social-github"></i>
                   </a>
                   <a
                     href="https://www.linkedin.com/in/jafar-ali-agharia-2645b3104"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {" "}
                     <i className="ion-social-linkedin"></i>
@@ -119,16 +132,25 @@ class HomePage extends React.Component {
               <div className="profile-image">
                 <img src="/nishit.jpg" alt="Nishit" />
                 <div className="icons">
-                  <a href="https://twitter.com/Nishitm1" target="_blank">
+                  <a
+                    href="https://twitter.com/Nishitm1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <i className="ion-social-twitter"></i>
                   </a>
-                  <a href="https://github.com/ryux00" target="_blank">
+                  <a
+                    href="https://github.com/ryux00"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {" "}
                     <i className="ion-social-github"></i>
                   </a>
                   <a
                     href="https://www.linkedin.com/in/nishit-mohanan/"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {" "}
                     <i className="ion-social-linkedin"></i>
@@ -146,11 +168,12 @@ class HomePage extends React.Component {
         <a
           href="https://www.producthunt.com/posts/youtube-fiesta?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-youtube-fiesta"
           target="_blank"
+          rel="noopener noreferrer"
         >
           <img
             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=202836&theme=light"
             alt="Youtube Fiesta - Watch Youtube with friends in sync! | Product Hunt Embed"
-            style={{width: "250px",height: "54px"}}
+            style={{ width: "250px", height: "54px" }}
             width="250px"
             height="54px"
             className="product_hunt_button"
