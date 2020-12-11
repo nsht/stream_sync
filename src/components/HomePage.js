@@ -122,7 +122,7 @@ class HomePage extends React.Component {
                   <a href="https://twitter.com/Nishitm1" target="_blank">
                     <i className="ion-social-twitter"></i>
                   </a>
-                  <a href="https://github.com/ryux00" target="_blank">
+                  <a href="https://github.com/nsht" target="_blank">
                     {" "}
                     <i className="ion-social-github"></i>
                   </a>
