@@ -589,6 +589,7 @@ input[type="url"]:focus {
   width: 280px;
 }
 
+
 html:not(.style-scope) {
   --google-red-100: #f4c7c3;
   --google-red-300: #e67c73;
