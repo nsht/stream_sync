@@ -26,7 +26,7 @@ class Navbar extends React.Component {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a href="https://www.paypal.me/jeff007ali"className="bmac_link" target="_blank" rel="noopener noreferrer">
+              <a href="https://bit.ly/2LovD7H"className="bmac_link" target="_blank" rel="noopener noreferrer">
                 <img
                   src="https://cdn.buymeacoffee.com/buttons/lato-red.png"
                   alt="Buy Me A Coffee"
